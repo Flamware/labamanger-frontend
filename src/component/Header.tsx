@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header className="bg-black text-white py-4 sticky top-0 z-50">
+        <header className="bg-black text-white py-4 sticky top-0 z-50 shadow-lg w-full">
             <div className="container mx-auto flex items-center justify-between">
                 <div className="logo_container">
                     <Link to="/" className="inline-block">
