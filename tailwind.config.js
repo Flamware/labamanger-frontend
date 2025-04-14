@@ -7,25 +7,40 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        "text-reveal": "text-reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) 0.5s",
+      },
+      keyframes: {
+        "text-reveal": {
+          "0%": {
+            transform: "translate(0, 100%)",
+          },
+          "100%": {
+            transform: "translate(0, 0)",
+          },
+        },
+      },
       colors: {
         mint: {
           500: 'oklch(72% 0.11 178)',
           600: 'oklch(72% 0.11 178 / 0.8)',
         },
         'text-mint': {
-            500: 'oklch(72% 0.11 178)',
-            600: 'oklch(72% 0.11 178 / 0.8)',
-            },
+          500: 'oklch(72% 0.11 178)',
+          600: 'oklch(72% 0.11 178 / 0.8)',
+        },
         'bg-mint': {
-            500: 'oklch(72% 0.11 178)',
-            600: 'oklch(72% 0.11 178 / 0.8)',
-            },
+          500: 'oklch(72% 0.11 178)',
+          600: 'oklch(72% 0.11 178 / 0.8)',
+        },
         'from-mint': 'oklch(72% 0.11 178)',
         'to-mint': 'oklch(72% 0.11 178 / 0.8)',
       },
     },
   },
-  plugins: [],
+  plugins: [
+      require("daisyui"),
+  ],
   // Add purge options for production builds (recommended)
   purge: {
     enabled: process.env.NODE_ENV === 'production',
