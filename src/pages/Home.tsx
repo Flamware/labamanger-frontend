@@ -5,7 +5,7 @@ const Home: React.FC = () => {
     return (
         <div className="text-white min-h-screen flex flex-col bg-black">
             {/* Hero Section (You can customize this) */}
-            <section className="py-20 md:py-40 text-center">
+            <section className="py-10 md:py-20 text-center">
                 <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-text-reveal">Bienvenue au CIAD-LAB</h1>
                 <p className="text-lg md:text-xl text-gray-400 ">Votre centre de recherche et d'innovation</p>
                 {/* You can add more introductory content or buttons here */}
