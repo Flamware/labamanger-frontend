@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import DataTable from 'datatables.net-react';
 import DT from 'datatables.net-dt';
+import 'datatables.net-responsive-dt';
+import 'datatables.net-select-dt';
 
 
 DataTable.use(DT);
@@ -11,6 +13,32 @@ function Equipe() {
     Array<[string]>
   >([
     [
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
+      'Tiger Nixon',
+    ],[
       'Tiger Nixon',
     ],
 
@@ -32,7 +60,10 @@ function Equipe() {
           </DataTable>
         </div>
         <div className="flex-1">
-          <DataTable data={tableData} className="display w-full">
+          <DataTable data={tableData} className="display w-full" options={{
+            responsive: true,
+            select: true,
+          }}>
             <thead>
               <tr>
                 <th>Status in the organization</th>
