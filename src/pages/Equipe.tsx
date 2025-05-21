@@ -1,75 +1,147 @@
-import React from 'react';
-import ContactCarousel from '../component/home/ContactCarousel.tsx';
-import AboutUs from "../component/home/AboutUs.tsx"; // Assuming ContactCarousel.tsx is in the same directory
+import React, { useState } from 'react';
+
 
 const Equipe: React.FC = () => {
+
+      // State to manage the visibility of each section
+  const [isStatusVisible, setIsStatusVisible] = useState(true);
+  const [isResponsibilityVisible, setIsResponsibilityVisible] = useState(true);
+  const [isOtherOrganizationsVisible, setIsOtherOrganizationsVisible] = useState(true);
+
+      const statusData = [
+    { title: 'Administrative Staff', count: 2 },
+    { title: 'Associate Professor', count: 9 },
+    { title: 'Associate Professor HDR', count: 3 },
+    { title: 'Associated Member', count: 10 },
+    { title: 'Contractual Teacher Researcher', count: 2 },
+    { title: 'Emeritus Professor', count: 1 },
+  ];
+
+  const responsibilityData = [
+    { title: 'No data', count: 127 },
+    { title: 'Deputy Director', count: 1 },
+    { title: 'Director', count: 1 },
+    { title: 'Responsible of a technological platform', count: 3 },
+    { title: 'Responsible of the business unit', count: 2 },
+    { title: 'Responsible of the conferences and seminars', count: 1 },
+  ];
+
+  const otherOrganizationsData = [
+    { title: 'No data', count: 4 },
+    { title: 'AU (Canada)', count: 1 },
+    { title: 'CAM (United Kingdom), uB', count: 1 },
+    { title: 'RMIT (Australia)', count: 1 },
+    { title: 'uB', count: 35 },
+    { title: 'UB (United States)', count: 1 },
+  ];
+
+  const directionData = [
+    { name: 'Bertaux Aurélie, Prof.Dr.', title: 'Full Professor', responsibility: 'Deputy Director', organization: 'uB' },
+    { name: 'Galland Stéphane, Prof.Dr.', title: 'Full Professor', responsibility: 'Director', organization: 'UTBM' },
+  ];
+
+  const researchersData = [
+    { name: 'Abbas-Turki Abdeljalil, Prof.Dr.', title: 'Full Professor', responsibility: 'Responsible of a technological platform', organization: 'UTBM' },
+    { name: 'Benkirane Fatima Ezzahra, Dr.', title: 'Contractual Teacher Researcher', responsibility: '', organization: 'UTBM' },
+    { name: 'Chahi Abderrazak, Dr.', title: 'Associate Professor', responsibility: '', organization: 'UTBM' },
+    { name: 'Crombez Nathan, Dr.', title: 'Associate Professor', responsibility: '', organization: 'UTBM' },
+    { name: 'Créput Jean-Charles, Dr.', title: 'Associate Professor HDR', responsibility: '', organization: 'UTBM' },
+    { name: 'Dridi Mahjoub, Dr.', title: 'Associate Professor HDR', responsibility: '', organization: 'UTBM' },
+  ];
     return (
-        <div className="text-white min-h-screen flex flex-col bg-gray-900">
-            {/* Hero Section */}
-            <section className="relative text-center overflow-hidden py-16 md:py-24 bg-black">
-                <div className="absolute inset-0 z-0 bg-black"></div>
-                <div className="container mx-auto px-4 relative z-10">
-                    <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-lime-400 animate-fade-down animate-delay-100">
-                        Bienvenue au CIAD-LAB
-                    </h1>
-                    <p className="text-lg md:text-xl text-gray-300 animate-fade-up animate-delay-200">
-                        Votre centre de recherche et d'innovation en Intelligence Artificielle Distribuée.
-                    </p>
-                    {/* Optional: Call to Action Button */}
-                    {/* <button className="bg-lime-500 hover:bg-lime-600 text-black font-semibold py-3 px-6 rounded-full transition duration-300 animate-pulse">
-                        En savoir plus
-                    </button> */}
-                </div>
-            </section>
-
-            {/* Contact Information Carousel */}
-            <section className="w-full flex justify-center py-8 md:py-12 bg-gradient-to-b from-black">
-                <div className="container">
-                    <h2 className="text-2xl font-semibold text-lime-400 text-center mb-6 animate-slide-in-left">
-                        Découvrez nos Domaines d'Expertise
-                    </h2>
-                    <ContactCarousel />
-                </div>
-            </section>
-
-            {/* About Us and Recent Projects */}
-            <section className="py-16 bg-gray-900">
-                <div className="container mx-auto text-center">
-                    <div className="mb-12 flex justify-center">
-                        <div className="w-full md:w-1/2"> {/* Limit width to half on medium screens and above */}
-                            <AboutUs />
-                        </div>
-                    </div>
-                    <h2 className="text-2xl font-semibold mb-8 text-lime-400 animate-slide-in-right">
-                        Nos Projets Récents
-                    </h2>
-                    {/* Add a component or content showcasing recent projects */}
-                    <p className="text-gray-300 mb-8 animate-fade-in">
-                        Explorez nos dernières initiatives et réalisations qui repoussent les limites de l'IA distribuée.
-                    </p>
-                    {/* Example Project Cards (Replace with your actual data/components) */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div className="bg-gray-800 rounded-lg shadow-md p-6 animate-slide-up delay-100">
-                            <h3 className="font-semibold text-lg text-white mb-2">Projet IoT Intelligent</h3>
-                            <p className="text-gray-400 text-sm">Développement d'une plateforme IoT pour la gestion intelligente des ressources urbaines.</p>
-                        </div>
-                        <div className="bg-gray-800 rounded-lg shadow-md p-6 animate-slide-up delay-200">
-                            <h3 className="font-semibold text-lg text-white mb-2">Food Tech Innovation</h3>
-                            <p className="text-gray-400 text-sm">Application de l'IA pour optimiser la production et la distribution alimentaire.</p>
-                        </div>
-                        <div className="bg-gray-800 rounded-lg shadow-md p-6 animate-slide-up delay-300">
-                            <h3 className="font-semibold text-lg text-white mb-2">eHealth System Distribué</h3>
-                            <p className="text-gray-400 text-sm">Conception d'un système de santé distribué pour un suivi patient personnalisé.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <footer className="bg-gray-800 py-6 text-center text-gray-400 text-sm">
-                <p>&copy; {new Date().getFullYear()} CIAD-LAB. Tous droits réservés.</p>
-                <p className="mt-2">Belfort, Bourgogne-Franche-Comté, France</p>
-            </footer>
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <span>Filters Active - 0</span>
+        <div className="space-x-2">
+          <button className="px-4 py-2 bg-gray-200 rounded">Collapse All</button>
+          <button className="px-4 py-2 bg-gray-200 rounded">Show All</button>
+          <button className="px-4 py-2 bg-gray-200 rounded">Clear All</button>
         </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-4 mb-4">
+        <div className="p-2">
+          <div className="flex justify-between items-center">
+            <h3 className="font-bold mb-2">Status in the organization</h3>
+            <button onClick={() => setIsStatusVisible(!isStatusVisible)} className="px-2 py-1 bg-gray-200 rounded">
+              {isStatusVisible ? 'Collapse' : 'Expand'}
+            </button>
+          </div>
+          {isStatusVisible && (
+            <div>
+              {statusData.map((item, index) => (
+                <div key={index} className="flex justify-between p-2 border-b">
+                  <span>{item.title}</span>
+                  <span>{item.count}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="p-2">
+          <div className="flex justify-between items-center">
+            <h3 className="font-bold mb-2">Responsibility</h3>
+            <button onClick={() => setIsResponsibilityVisible(!isResponsibilityVisible)} className="px-2 py-1 bg-gray-200 rounded">
+              {isResponsibilityVisible ? 'Collapse' : 'Expand'}
+            </button>
+          </div>
+          {isResponsibilityVisible && (
+            <div>
+              {responsibilityData.map((item, index) => (
+                <div key={index} className="flex justify-between p-2 border-b">
+                  <span>{item.title}</span>
+                  <span>{item.count}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="p-2">
+          <div className="flex justify-between items-center">
+            <h3 className="font-bold mb-2">Other organizations</h3>
+            <button onClick={() => setIsOtherOrganizationsVisible(!isOtherOrganizationsVisible)} className="px-2 py-1 bg-gray-200 rounded">
+              {isOtherOrganizationsVisible ? 'Collapse' : 'Expand'}
+            </button>
+          </div>
+          {isOtherOrganizationsVisible && (
+            <div>
+              {otherOrganizationsData.map((item, index) => (
+                <div key={index} className="flex justify-between p-2 border-b">
+                  <span>{item.title}</span>
+                  <span>{item.count}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="mb-4">
+        <h3 className="font-bold mb-2">Direction</h3>
+        {directionData.map((person, index) => (
+          <div key={index} className="flex justify-between p-2 border-b">
+            <span>{person.name}</span>
+            <span>{person.title}</span>
+            <span>{person.responsibility}</span>
+            <span>{person.organization}</span>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <h3 className="font-bold mb-2">Researchers</h3>
+        {researchersData.map((person, index) => (
+          <div key={index} className="flex justify-between p-2 border-b">
+            <span>{person.name}</span>
+            <span>{person.title}</span>
+            <span>{person.responsibility}</span>
+            <span>{person.organization}</span>
+          </div>
+        ))}
+      </div>
+    </div>
     );
 };
 
