@@ -1,6 +1,7 @@
 import React from 'react';
 import ContactCarousel from '../component/home/ContactCarousel.tsx';
-import AboutUs from "../component/home/AboutUs.tsx"; // Assuming ContactCarousel.tsx is in the same directory
+import AboutUs from "../component/home/AboutUs.tsx";
+import Footer from "../component/Footer.tsx"; // Assuming ContactCarousel.tsx is in the same directory
 
 const Home: React.FC = () => {
     return (
@@ -64,11 +65,8 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </section>
+            <Footer/>
 
-            <footer className="bg-gray-800 py-6 text-center text-gray-400 text-sm">
-                <p>&copy; {new Date().getFullYear()} CIAD-LAB. Tous droits réservés.</p>
-                <p className="mt-2">Belfort, Bourgogne-Franche-Comté, France</p>
-            </footer>
         </div>
     );
 };
