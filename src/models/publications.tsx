@@ -4,14 +4,17 @@ export interface PersonOnWebsite {
 }
 
 export interface PublicationsDTO {
-  title: string;
-  doi: string;
-  issn: string;
-  publicationDate: string;
-  publicationType: string;
-  persons: PersonOnWebsite[];
-  abstractText: string;
-  pdfUrl: string;
-  language: string;
-  keywords: string[];
+    title: string;
+    doi: string;
+    issn: string;
+    publicationDate: string;
+    publicationType: string;
+    persons: PersonOnWebsite[];
+    abstractText: string;
+    extraUrl: string;
+    dblpUrl: string;
+    pdfUrl: string;
+    awardCertificate: string;
+    language: string;
+    keywords: string[];
 }
