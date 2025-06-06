@@ -74,6 +74,8 @@ const Publications: React.FC = () => {
         });
     }, [publications, yearFilter, typeFilter, authorFilter]);
 
+    // TODO modify the pulications look (justifier le paragraph, ...)
+
     return (
         <div className="text-white flex flex-col bg-gray-900 min-h-screen">
             <main className="flex-grow container mx-auto px-4 py-8">

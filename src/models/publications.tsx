@@ -1,6 +1,6 @@
 export interface PersonOnWebsite {
     name: string;
-    webPageId: string;
+    webPageId: string; // TODO voir avec Kevin pour la page person
 }
 
 export interface PublicationsDTO {
