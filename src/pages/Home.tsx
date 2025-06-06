@@ -2,6 +2,7 @@ import React from 'react';
 import ContactCarousel from '../component/home/ContactCarousel.tsx';
 import AboutUs from "../component/home/AboutUs.tsx";
 import Footer from "../component/Footer.tsx"; // Assuming ContactCarousel.tsx is in the same directory
+import IA from "../component/home/IA.tsx"
 
 const Home: React.FC = () => {
     return (
@@ -39,6 +40,11 @@ const Home: React.FC = () => {
                     <div className="mb-12 flex justify-center">
                         <div className="w-full md:w-1/2"> {/* Limit width to half on medium screens and above */}
                             <AboutUs />
+                        </div>
+                    </div>
+                    <div className="mb-12 flex justify-center">
+                        <div className="w-full md:w-1/2"> {/* Limit width to half on medium screens and above */}
+                            <IA />
                         </div>
                     </div>
                     <h2 className="text-2xl font-semibold mb-8 text-lime-400 animate-slide-in-right">
