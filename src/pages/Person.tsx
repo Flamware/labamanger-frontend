@@ -1,10 +1,83 @@
 import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
-import './ProfileCard.css';
 import { ProfileData } from '../component/model/PersonData';
+import ORCIDProfile from '../component/model/ORCIDProfile';
 
-const ProfileCard: React.FC = () => {
+const Person: React.FC = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [activeTab, setActiveTab] = useState('bio');
+
+  const BioContent = () => (
+    <p className="text-gray-800">
+        <ORCIDProfile />
+    </p>
+  );
+
+  const PublicationsContent = () => (
+    <div className="text-gray-800">
+      <h3 className="font-bold">Publications</h3>
+      <ul className="list-disc pl-5">
+        <li>Publication 1</li>
+        <li>Publication 2</li>
+        <li>Publication 3</li>
+      </ul>
+      <h3 className="font-bold mt-4">Talks</h3>
+      <ul className="list-disc pl-5">
+        <li>Talk 1</li>
+        <li>Talk 2</li>
+      </ul>
+    </div>
+  );
+
+  const ProjectsContent = () => (
+    <div className="text-gray-800">
+      <h3 className="font-bold">Ongoing Projects</h3>
+      <ul className="list-disc pl-5">
+        <li>Project A</li>
+        <li>Project B</li>
+      </ul>
+    </div>
+  );
+
+  const SupervisionsContent = () => (
+    <div className="text-gray-800">
+      <h3 className="font-bold">Current Supervisions</h3>
+      <ul className="list-disc pl-5">
+        <li>Student X - Topic on AI</li>
+        <li>Student Y - Topic on Machine Learning</li>
+      </ul>
+    </div>
+  );
+
+  const JuryContent = () => (
+    <div className="text-gray-800">
+      <h3 className="font-bold">Jury Participation</h3>
+      <ul className="list-disc pl-5">
+        <li>Conference A - 2023</li>
+        <li>Conference B - 2023</li>
+      </ul>
+    </div>
+  );
+
+  const InvitationsContent = () => (
+    <div className="text-gray-800">
+      <h3 className="font-bold">Invited Talks</h3>
+      <ul className="list-disc pl-5">
+        <li>University X - Guest Lecture on AI</li>
+        <li>Conference Y - Keynote on Future Technologies</li>
+      </ul>
+    </div>
+  );
+
+  const TeachingContent = () => (
+    <div className="text-gray-800">
+      <h3 className="font-bold">Courses Taught</h3>
+      <ul className="list-disc pl-5">
+        <li>Introduction to Artificial Intelligence</li>
+        <li>Advanced Machine Learning</li>
+      </ul>
+    </div>
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +86,7 @@ const ProfileCard: React.FC = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const data: ProfileData = await response.json();
+        const data = await response.json();
         setProfileData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -24,38 +97,110 @@ const ProfileCard: React.FC = () => {
   }, []);
 
   if (!profileData) {
-    return <div>Loading...</div>;
+    return <div className="text-gray-800">Loading...</div>;
   }
 
   return (
-    <div className="profile-card">
-      <div className="profile-header">
-        <h1>{profileData.firstName} {profileData.lastName}, Prof.Dr.</h1>
-        <h2>Director of CIAD</h2>
-        <h3>Full Professor</h3>
-        <div className="profile-contact">
-          <p><FaEnvelope /> {profileData.email}</p>
-          <p><FaPhone /> +{profileData.officePhone.prefix} ({profileData.officePhone.country}) {profileData.officePhone.localNumber}</p>
+    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl m-6">
+      <div className="p-8">
+        <div className=" text-gray-800">
+          <h1 className="text-2xl font-bold">{profileData.firstName} {profileData.lastName}, Prof.Dr.</h1>
+          <h2 className="text-xl text-gray-600">Director of CIAD</h2>
+          <h3 className="text-lg text-gray-500">Full Professor</h3>
+          <div className="flex gap-4 my-4">
+            <p className="flex items-center gap-2"><FaEnvelope /> {profileData.email}</p>
+            <p className="flex items-center gap-2"><FaPhone /> +{profileData.officePhone.prefix} ({profileData.officePhone.country}) {profileData.officePhone.localNumber}</p>
+          </div>
+          <p className="flex items-center gap-2"><FaMapMarkerAlt /> Université de Technologie de Belfort Montbéliard, 13 rue Ernest Thierry-Mieg 90010 Belfort</p>
+          <p>Room: {profileData.room}</p>
+          <div className="flex gap-4 my-4">
+            <p className="mt-2">Ranking: H-Index (WoS): {profileData.ranking.wosHindex}</p>
+            <p className="mt-2">H-Index (Scopus): {profileData.ranking.scopusHindex}</p>
+            <p className="mt-2">H-Index (Google Scholar): {profileData.ranking.googleScholarHindex}</p>
+          </div>
+          <p> Lien : </p>
+          <div className="flex gap-4 my-4">
+            <a href={profileData.links.orcidURL || '#'} className="text-blue-500 hover:underline">orcid</a>
+            <a href={profileData.links.gravatarURL} className="text-blue-500 hover:underline">Gravatar</a>
+            <a href={profileData.links.halURL || '#'} className="text-blue-500 hover:underline">HAL</a>
+            <a href={profileData.links.facebookURL} className="text-blue-500 hover:underline">Facebook</a>
+            <a href={profileData.links.googleScholarURL} className="text-blue-500 hover:underline">Google Scholar</a>
+            <a href={profileData.links.academiaURL} className="text-blue-500 hover:underline">Academia.edu</a>
+            <a href={profileData.links.researcherIdURL} className="text-blue-500 hover:underline">ResearcherID</a>
         </div>
-        <p><FaMapMarkerAlt /> Université de Technologie de Belfort Montbéliard, 13 rue Ernest Thierry-Mieg 90010 Belfort</p>
-      </div>
-      <div className="profile-image">
-        <img src={profileData.photo} alt="Profile" />
-      </div>
-      <div className="profile-links">
-        <a href="#bio">Bio</a>
-        <a href="#publications">Publications & Talks</a>
-        <a href="#projects">Projects</a>
-        <a href="#supervisions">Supervisions</a>
-        <a href="#jury">Jurys</a>
-        <a href="#invitations">Invitations</a>
-        <a href="#teaching">Teaching</a>
-      </div>
-      <div className="profile-bio">
-        <p>Prof. Dr. MSc. Stéphane Galland is the Director (and Executive Director) of the research laboratory on Distributed Knowledge and Distributed Artificial Intelligence...</p>
+        <div className="flex gap-4 my-4">
+            <a href={profileData.links.cordisURL || '#'} className="text-blue-500 hover:underline">CORDIS</a>
+
+    
+            <a href={profileData.links.researchGateURL} className="text-blue-500 hover:underline">ResearchGate</a>
+            <a href={profileData.links.dblpURL} className="text-blue-500 hover:underline">DBLP</a>
+            <a href={profileData.links.linkedInURL} className="text-blue-500 hover:underline">LinkedIn</a>
+            <a href={profileData.links.adScientificIndexURL} className="text-blue-500 hover:underline">AD Scientific Index</a>
+            <a href={profileData.links.githubURL} className="text-blue-500 hover:underline">GitHub</a>
+          </div>
+        </div>
+        <div className="flex justify-center my-4">
+          <img className="w-32 h-32 rounded-full" src={profileData.photo} alt="Profile" />
+        </div>
+        <div className="flex justify-around border-b border-gray-200">
+        <button
+            className={`py-2 px-4 ${activeTab === 'bio' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
+            onClick={() => setActiveTab('bio')}
+        >
+            Bio
+        </button>
+        <button
+            className={`py-2 px-4 ${activeTab === 'publications' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
+            onClick={() => setActiveTab('publications')}
+        >
+            Publications & Talks
+        </button>
+        <button
+            className={`py-2 px-4 ${activeTab === 'projects' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
+            onClick={() => setActiveTab('projects')}
+        >
+            Projects
+        </button>
+        <button
+            className={`py-2 px-4 ${activeTab === 'supervisions' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
+            onClick={() => setActiveTab('supervisions')}
+        >
+            Supervisions
+        </button>
+        <button
+            className={`py-2 px-4 ${activeTab === 'jury' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
+            onClick={() => setActiveTab('jury')}
+        >
+            Jurys
+        </button>
+        <button
+            className={`py-2 px-4 ${activeTab === 'invitations' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
+            onClick={() => setActiveTab('invitations')}
+        >
+            Invitations
+        </button>
+        <button
+            className={`py-2 px-4 ${activeTab === 'teaching' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
+            onClick={() => setActiveTab('teaching')}
+        >
+            Teaching
+        </button>
+        </div>
+
+        <br></br>
+        <hr></hr>
+        <div className="mt-4 text-justify">
+          {activeTab === 'bio' && <BioContent />}
+          {activeTab === 'publications' && <PublicationsContent />}
+          {activeTab === 'projects' && <ProjectsContent />}
+          {activeTab === 'supervisions' && <SupervisionsContent />}
+          {activeTab === 'jury' && <JuryContent />}
+          {activeTab === 'invitations' && <InvitationsContent />}
+          {activeTab === 'teaching' && <TeachingContent />}
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProfileCard;
+export default Person;

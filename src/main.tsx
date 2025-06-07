@@ -5,6 +5,7 @@ import Header from "./component/Header.tsx";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from "./pages/Home.tsx";
 import Equipe from './pages/Equipe.tsx';
+import Person from './pages/Person.tsx';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path='/equipe' element={<Equipe/>}/>
+                <Route path='/person' element={<Person/>} />
             </Routes>
         </BrowserRouter>
     </StrictMode>,
