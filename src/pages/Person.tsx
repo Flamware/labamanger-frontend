@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { ProfileData } from '../component/model/PersonData';
-import ORCIDProfile from '../component/model/ORCIDProfile';
+import ORCIDProfile from '../component/Person/ORCIDProfile';
+import Project from '../component/Person/Projet';
 
 const Person: React.FC = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [activeTab, setActiveTab] = useState('bio');
 
-  const BioContent = () => (
-    <p className="text-gray-800">
-        <ORCIDProfile />
-    </p>
-  );
+ 
 
   const PublicationsContent = () => (
     <div className="text-gray-800">
@@ -25,16 +22,6 @@ const Person: React.FC = () => {
       <ul className="list-disc pl-5">
         <li>Talk 1</li>
         <li>Talk 2</li>
-      </ul>
-    </div>
-  );
-
-  const ProjectsContent = () => (
-    <div className="text-gray-800">
-      <h3 className="font-bold">Ongoing Projects</h3>
-      <ul className="list-disc pl-5">
-        <li>Project A</li>
-        <li>Project B</li>
       </ul>
     </div>
   );
@@ -100,99 +87,65 @@ const Person: React.FC = () => {
     return <div className="text-gray-800">Loading...</div>;
   }
 
-  return (
+return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl m-6">
       <div className="p-8">
-        <div className=" text-gray-800">
-          <h1 className="text-2xl font-bold">{profileData.firstName} {profileData.lastName}, Prof.Dr.</h1>
-          <h2 className="text-xl text-gray-600">Director of CIAD</h2>
-          <h3 className="text-lg text-gray-500">Full Professor</h3>
+        <div className="text-gray-800">
+          <h1 className="text-2xl font-bold">{profileData.firstName} {profileData.lastName}</h1>
           <div className="flex gap-4 my-4">
-            <p className="flex items-center gap-2"><FaEnvelope /> {profileData.email}</p>
-            <p className="flex items-center gap-2"><FaPhone /> +{profileData.officePhone.prefix} ({profileData.officePhone.country}) {profileData.officePhone.localNumber}</p>
+            <p className="flex items-center gap-2">
+              <FaEnvelope /> {profileData.email || 'No email available'}
+            </p>
+            <p className="flex items-center gap-2">
+              <FaPhone /> +{profileData.officePhone?.prefix} ({profileData.officePhone?.country}) {profileData.officePhone?.localNumber}
+            </p>
           </div>
-          <p className="flex items-center gap-2"><FaMapMarkerAlt /> Université de Technologie de Belfort Montbéliard, 13 rue Ernest Thierry-Mieg 90010 Belfort</p>
-          <p>Room: {profileData.room}</p>
+          <p className="flex items-center gap-2">
+            <FaMapMarkerAlt /> Université de Technologie de Belfort Montbéliard, 13 rue Ernest Thierry-Mieg 90010 Belfort
+          </p>
+          <p>Room: {profileData.room || 'No room available'}</p>
           <div className="flex gap-4 my-4">
-            <p className="mt-2">Ranking: H-Index (WoS): {profileData.ranking.wosHindex}</p>
-            <p className="mt-2">H-Index (Scopus): {profileData.ranking.scopusHindex}</p>
-            <p className="mt-2">H-Index (Google Scholar): {profileData.ranking.googleScholarHindex}</p>
+            <p className="mt-2">Ranking: H-Index (WoS): {profileData.ranking?.wosHindex || 'N/A'}</p>
+            <p className="mt-2">H-Index (Scopus): {profileData.ranking?.scopusHindex || 'N/A'}</p>
+            <p className="mt-2">H-Index (Google Scholar): {profileData.ranking?.googleScholarHindex || 'N/A'}</p>
           </div>
-          <p> Lien : </p>
+          <p>Lien :</p>
           <div className="flex gap-4 my-4">
-            <a href={profileData.links.orcidURL || '#'} className="text-blue-500 hover:underline">orcid</a>
-            <a href={profileData.links.gravatarURL} className="text-blue-500 hover:underline">Gravatar</a>
-            <a href={profileData.links.halURL || '#'} className="text-blue-500 hover:underline">HAL</a>
-            <a href={profileData.links.facebookURL} className="text-blue-500 hover:underline">Facebook</a>
-            <a href={profileData.links.googleScholarURL} className="text-blue-500 hover:underline">Google Scholar</a>
-            <a href={profileData.links.academiaURL} className="text-blue-500 hover:underline">Academia.edu</a>
-            <a href={profileData.links.researcherIdURL} className="text-blue-500 hover:underline">ResearcherID</a>
-        </div>
-        <div className="flex gap-4 my-4">
-            <a href={profileData.links.cordisURL || '#'} className="text-blue-500 hover:underline">CORDIS</a>
-
-    
-            <a href={profileData.links.researchGateURL} className="text-blue-500 hover:underline">ResearchGate</a>
-            <a href={profileData.links.dblpURL} className="text-blue-500 hover:underline">DBLP</a>
-            <a href={profileData.links.linkedInURL} className="text-blue-500 hover:underline">LinkedIn</a>
-            <a href={profileData.links.adScientificIndexURL} className="text-blue-500 hover:underline">AD Scientific Index</a>
-            <a href={profileData.links.githubURL} className="text-blue-500 hover:underline">GitHub</a>
+            <a href={profileData.links?.orcidURL || '#'} className="text-blue-500 hover:underline">ORCID</a>
+            <a href={profileData.links?.gravatarURL || '#'} className="text-blue-500 hover:underline">Gravatar</a>
+            <a href={profileData.links?.halURL || '#'} className="text-blue-500 hover:underline">HAL</a>
+            <a href={profileData.links?.facebookURL || '#'} className="text-blue-500 hover:underline">Facebook</a>
+            <a href={profileData.links?.googleScholarURL || '#'} className="text-blue-500 hover:underline">Google Scholar</a>
+            <a href={profileData.links?.academiaURL || '#'} className="text-blue-500 hover:underline">Academia.edu</a>
+            <a href={profileData.links?.researcherIdURL || '#'} className="text-blue-500 hover:underline">ResearcherID</a>
+          </div>
+          <div className="flex gap-4 my-4">
+            <a href={profileData.links?.cordisURL || '#'} className="text-blue-500 hover:underline">CORDIS</a>
+            <a href={profileData.links?.researchGateURL || '#'} className="text-blue-500 hover:underline">ResearchGate</a>
+            <a href={profileData.links?.dblpURL || '#'} className="text-blue-500 hover:underline">DBLP</a>
+            <a href={profileData.links?.linkedInURL || '#'} className="text-blue-500 hover:underline">LinkedIn</a>
+            <a href={profileData.links?.adScientificIndexURL || '#'} className="text-blue-500 hover:underline">AD Scientific Index</a>
+            <a href={profileData.links?.githubURL || '#'} className="text-blue-500 hover:underline">GitHub</a>
           </div>
         </div>
         <div className="flex justify-center my-4">
-          <img className="w-32 h-32 rounded-full" src={profileData.photo} alt="Profile" />
+          <img className="w-32 h-32 rounded-full" src={profileData.photo || 'default-profile.png'} alt="Profile" />
         </div>
         <div className="flex justify-around border-b border-gray-200">
-        <button
-            className={`py-2 px-4 ${activeTab === 'bio' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
-            onClick={() => setActiveTab('bio')}
-        >
-            Bio
-        </button>
-        <button
-            className={`py-2 px-4 ${activeTab === 'publications' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
-            onClick={() => setActiveTab('publications')}
-        >
-            Publications & Talks
-        </button>
-        <button
-            className={`py-2 px-4 ${activeTab === 'projects' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
-            onClick={() => setActiveTab('projects')}
-        >
-            Projects
-        </button>
-        <button
-            className={`py-2 px-4 ${activeTab === 'supervisions' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
-            onClick={() => setActiveTab('supervisions')}
-        >
-            Supervisions
-        </button>
-        <button
-            className={`py-2 px-4 ${activeTab === 'jury' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
-            onClick={() => setActiveTab('jury')}
-        >
-            Jurys
-        </button>
-        <button
-            className={`py-2 px-4 ${activeTab === 'invitations' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
-            onClick={() => setActiveTab('invitations')}
-        >
-            Invitations
-        </button>
-        <button
-            className={`py-2 px-4 ${activeTab === 'teaching' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`}
-            onClick={() => setActiveTab('teaching')}
-        >
-            Teaching
-        </button>
+          <button className={`py-2 px-4 ${activeTab === 'bio' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('bio')}>Bio</button>
+          <button className={`py-2 px-4 ${activeTab === 'publications' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('publications')}>Publications & Talks</button>
+          <button className={`py-2 px-4 ${activeTab === 'projects' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('projects')}>Projects</button>
+          <button className={`py-2 px-4 ${activeTab === 'supervisions' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('supervisions')}>Supervisions</button>
+          <button className={`py-2 px-4 ${activeTab === 'jury' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('jury')}>Jurys</button>
+          <button className={`py-2 px-4 ${activeTab === 'invitations' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('invitations')}>Invitations</button>
+          <button className={`py-2 px-4 ${activeTab === 'teaching' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('teaching')}>Teaching</button>
         </div>
-
-        <br></br>
-        <hr></hr>
-        <div className="mt-4 text-justify">
-          {activeTab === 'bio' && <BioContent />}
+        <br />
+        <hr />
+        <div className="mt-4 text-justify text-black">
+          {activeTab === 'bio' && <ORCIDProfile lien={profileData.links.orcidURL || ''}/>}
           {activeTab === 'publications' && <PublicationsContent />}
-          {activeTab === 'projects' && <ProjectsContent />}
+          {activeTab === 'projects' && <Project userId={1}/>}
           {activeTab === 'supervisions' && <SupervisionsContent />}
           {activeTab === 'jury' && <JuryContent />}
           {activeTab === 'invitations' && <InvitationsContent />}

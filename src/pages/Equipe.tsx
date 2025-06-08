@@ -7,7 +7,27 @@ import 'datatables.net-select-dt';
 DataTable.use(DT);
 
 function Equipe() {
-  const [fetchedData, setFetchedData] = useState([['Loading...']]);
+  const [data, setData] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = async () => {
+    try {
+      console.log("Fetching data from API...");
+      const response = await fetch(`https://localhost:8080/LabManager/api/v4/persons/getAllPerson`);
+      if (!response.ok) throw new Error('Failed to fetch projects data');
+      let dataFetched = await response.json();
+      const data = dataFetched
+      console.log("Data fetched successfully:", data);
+      setData(data);
+      console.log(data);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError(String(err));
+      }
+    }
+  };
 
   const [tableData] = useState([
     ['Tiger Nixon'],
@@ -26,37 +46,24 @@ function Equipe() {
   ]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://api.example.com/data');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const jsonData = await response.json();
-
-        // Transform the JSON data to fit the DataTable format
-        const transformedData = jsonData.map((item: { fullName: any; primaryEmail: any; officeRoom: any; civilTitle: any; nationality: any; officePhone: { prefix: any; localNumber: any; }; mobilePhone: { prefix: any; localNumber: any; }; }) => [
-          item.fullName,
-          item.primaryEmail,
-          item.officeRoom,
-          item.civilTitle,
-          item.nationality,
-          item.officePhone ? `${item.officePhone.prefix} ${item.officePhone.localNumber}` : 'N/A',
-          item.mobilePhone ? `${item.mobilePhone.prefix} ${item.mobilePhone.localNumber}` : 'N/A'
-        ]);
-
-        setFetchedData(transformedData);
-      } catch (err) {
-        console.error('Error details:', err);
-        setFetchedData([['Error fetching data: ' + err]]);
-      }
-    };
-
+    console.log("Fetching data...");
     fetchData();
   }, []);
 
+  const columns = [
+    { data: 'firstName', title: 'Prénom' },
+    { data: 'lastName', title: 'Nom' },
+    { data: 'civilTitle', title: 'Titre' },
+    {
+      data: 'Email',
+      title: 'Email',
+      render: (data: any) => data || 'N/A', // Handle null or undefined values
+    },
+    { data: 'organizationName', title: 'Organisations' },
+  ];
+
   return (
-    <>
+    <div>
       <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
 
       <div className="w-full p-4">
@@ -94,26 +101,20 @@ function Equipe() {
           </div>
         </div>
         <div>
-          <DataTable data={fetchedData} className="display w-full" options={{
-            responsive: true,
-            select: true,
-            scrollCollapse: true
-          }}>
-            <thead>
-              <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Office Room</th>
-                <th>Title</th>
-                <th>Nationality</th>
-                <th>Office Phone</th>
-                <th>Mobile Phone</th>
-              </tr>
-            </thead>
-          </DataTable>
+        <DataTable data={data} columns={columns} className="display">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Title</th>
+              <th>Email</th>
+              <th>Organization</th>
+            </tr>
+          </thead>
+        </DataTable>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

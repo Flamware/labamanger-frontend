@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 
-const orcid_id = '0000-0002-1559-7861';
 
-function App() {
+function App({lien}: { lien: string }) {
   const [orcidData, setOrcidData] = useState(null);
   const [error, setError] = useState<string | null>(null);
-
+const orcid_id = lien.split('/').pop();
   const fetchOrcidData = async () => {
     try {
       const response = await fetch(`https://localhost:8080/LabManager/api/v4/persons/ORCID/${orcid_id}`);
