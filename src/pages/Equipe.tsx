@@ -51,9 +51,15 @@ function Equipe() {
   }, []);
 
   const columns = [
-    { data: 'firstName', title: 'Prénom' },
-    { data: 'lastName', title: 'Nom' },
-    { data: 'civilTitle', title: 'Titre' },
+    { data: 'fullName', title: 'Nom Prénom',
+      render: (data: any, type: string, row: any) => {
+        if (type === 'display') {
+          return `<a href="/Person/${row.id}">${data}</a>`;
+        }
+        return data;
+      }
+     },
+    { data: 'civilTitle', title: 'Titre', },
     {
       data: 'Email',
       title: 'Email',
@@ -101,16 +107,8 @@ function Equipe() {
           </div>
         </div>
         <div>
-        <DataTable data={data} columns={columns} className="display">
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Title</th>
-              <th>Email</th>
-              <th>Organization</th>
-            </tr>
-          </thead>
+        <DataTable data={data} columns={columns} className="display" options={{
+          responsive: true, select: true, scrollCollapse: true,}}>
         </DataTable>
         </div>
       </div>

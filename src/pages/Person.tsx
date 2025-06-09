@@ -3,10 +3,13 @@ import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { ProfileData } from '../component/model/PersonData';
 import ORCIDProfile from '../component/Person/ORCIDProfile';
 import Project from '../component/Person/Projet';
+import { useParams } from 'react-router-dom';
+import SupervisionsContent from '../component/Person/Supervision';
 
 const Person: React.FC = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [activeTab, setActiveTab] = useState('bio');
+  const { id } = useParams();
 
  
 
@@ -26,15 +29,7 @@ const Person: React.FC = () => {
     </div>
   );
 
-  const SupervisionsContent = () => (
-    <div className="text-gray-800">
-      <h3 className="font-bold">Current Supervisions</h3>
-      <ul className="list-disc pl-5">
-        <li>Student X - Topic on AI</li>
-        <li>Student Y - Topic on Machine Learning</li>
-      </ul>
-    </div>
-  );
+
 
   const JuryContent = () => (
     <div className="text-gray-800">
@@ -69,7 +64,7 @@ const Person: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:8080/LabManager/api/v4/persons/card?id=1');
+        const response = await fetch('https://localhost:8080/LabManager/api/v4/persons/card?id=' + id);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -145,8 +140,8 @@ return (
         <div className="mt-4 text-justify text-black">
           {activeTab === 'bio' && <ORCIDProfile lien={profileData.links.orcidURL || ''}/>}
           {activeTab === 'publications' && <PublicationsContent />}
-          {activeTab === 'projects' && <Project userId={1}/>}
-          {activeTab === 'supervisions' && <SupervisionsContent />}
+          {activeTab === 'projects' && id && <Project userId={Number(id)}/>}
+          {activeTab === 'supervisions' && id && <SupervisionsContent userId={Number(id)}/>}
           {activeTab === 'jury' && <JuryContent />}
           {activeTab === 'invitations' && <InvitationsContent />}
           {activeTab === 'teaching' && <TeachingContent />}
