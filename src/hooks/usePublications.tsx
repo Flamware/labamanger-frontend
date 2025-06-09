@@ -14,6 +14,7 @@ export const usePublications = () => {
                     throw new Error(`Error: ${response.status}`);
                 }
                 const data: PublicationsDTO[] = await response.json();
+                
                 setPublications(data);
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'An unknown error occurred');
