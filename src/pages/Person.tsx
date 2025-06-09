@@ -8,30 +8,12 @@ import SupervisionsContent from '../component/Person/Supervision';
 import JuryContent from '../component/Person/Jury';
 import Invitation from '../component/Person/Invitation';
 import Teaching from '../component/Person/Teaching';
-
+import Publication from '../component/Person/Publication';
 
 const Person: React.FC = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [activeTab, setActiveTab] = useState('bio');
   const { id } = useParams();
-
- 
-
-  const PublicationsContent = () => (
-    <div className="text-gray-800">
-      <h3 className="font-bold">Publications</h3>
-      <ul className="list-disc pl-5">
-        <li>Publication 1</li>
-        <li>Publication 2</li>
-        <li>Publication 3</li>
-      </ul>
-      <h3 className="font-bold mt-4">Talks</h3>
-      <ul className="list-disc pl-5">
-        <li>Talk 1</li>
-        <li>Talk 2</li>
-      </ul>
-    </div>
-  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -111,7 +93,7 @@ return (
         <hr />
         <div className="mt-4 text-justify text-black">
           {activeTab === 'bio' && <ORCIDProfile lien={profileData.links.orcidURL || ''}/>}
-          {activeTab === 'publications' && <PublicationsContent />}
+          {activeTab === 'publications' && <Publication userId={Number(id)} />}
           {activeTab === 'projects' && id && <Project userId={Number(id)}/>}
           {activeTab === 'supervisions' && id && <SupervisionsContent userId={Number(id)}/>}
           {activeTab === 'jury' && <JuryContent userId={Number(id)}/>}

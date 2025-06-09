@@ -73,39 +73,7 @@ function Equipe() {
       <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
 
       <div className="w-full p-4">
-        <div className="flex flex-row space-x-10 w-full">
-          <div className="flex-1">
-            <DataTable data={tableData} className="display w-full">
-              <thead>
-                <tr>
-                  <th>Status in the organization</th>
-                </tr>
-              </thead>
-            </DataTable>
-          </div>
-          <div className="flex-1">
-            <DataTable data={tableData} className="display w-full" options={{
-              responsive: true,
-              select: true,
-              scrollCollapse: true
-            }}>
-              <thead>
-                <tr>
-                  <th>Status in the organization</th>
-                </tr>
-              </thead>
-            </DataTable>
-          </div>
-          <div className="flex-1">
-            <DataTable data={tableData} className="display w-full">
-              <thead>
-                <tr>
-                  <th>Status in the organization</th>
-                </tr>
-              </thead>
-            </DataTable>
-          </div>
-        </div>
+
         <div>
         <DataTable data={data} columns={columns} className="display" options={{
           responsive: true, select: true, scrollCollapse: true,}}>
