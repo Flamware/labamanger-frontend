@@ -14,6 +14,7 @@ interface Props {
     onTypeChange: (value: string) => void;
     onAuthorChange: (value: string) => void;
     onSearchChange: (value: string) => void;
+    onResetFilters: () => void;
     years: FilterOption[];
     types: FilterOption[];
     authors: FilterOption[];
@@ -28,12 +29,13 @@ const PublicationFilters: React.FC<Props> = ({
     onTypeChange,
     onAuthorChange,
     onSearchChange,
+    onResetFilters,
     years,
     types,
     authors,
     search,
 }) => (
-    <div className="flex flex-wrap gap-4 mb-8">
+    <div className="flex flex-wrap gap-4 mb-8 items-center">
         <input
             className="bg-gray-800 text-white p-2 rounded w-full md:w-64"
             type="text"
@@ -77,7 +79,14 @@ const PublicationFilters: React.FC<Props> = ({
                 </option>
             ))}
         </select>
+
+        <button
+            onClick={onResetFilters}
+            className="bg-red-600 hover:bg-red-700 text-white p-2 rounded"
+        >
+            Réinitialiser les filtres
+        </button>
     </div>
-);
+);  
 
 export default PublicationFilters;

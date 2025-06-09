@@ -16,6 +16,13 @@ const PublicationsPage: React.FC = () => {
         setExpandedIndex(prev => (prev === index ? null : index));
     };
 
+    const resetFilters = () => {
+        setYearFilter('Tous');
+        setTypeFilter('Tous');
+        setAuthorFilter('Tous');
+        setSearch('');
+    };
+
     const filteredPublications = useMemo(() => {
         return publications.filter(pub => {
             const year = new Date(pub.publicationDate).getFullYear().toString();
@@ -73,7 +80,7 @@ const PublicationsPage: React.FC = () => {
             }));
 
         return {
-            years: toFilterArray(yearCount).sort((a, b) => parseInt(a.value) - parseInt(b.value)),
+            years: toFilterArray(yearCount).sort((a, b) => parseInt(b.value) - parseInt(a.value)),
             types: toFilterArray(typeCount).sort((a, b) => a.label.localeCompare(b.label)),
             authors: toFilterArray(authorCount).sort((a, b) => a.label.localeCompare(b.label)),
         };
@@ -90,6 +97,7 @@ const PublicationsPage: React.FC = () => {
                     onTypeChange={setTypeFilter}
                     onAuthorChange={setAuthorFilter}
                     onSearchChange={setSearch}
+                    onResetFilters={resetFilters}
                     search={search}
                     years={filterOptions.years}
                     types={filterOptions.types}
