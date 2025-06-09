@@ -3,10 +3,16 @@ import ContactCarousel from '../component/home/ContactCarousel.tsx';
 import AboutUs from "../component/home/AboutUs.tsx";
 import Footer from "../component/Footer.tsx"; // Assuming ContactCarousel.tsx is in the same directory
 import IA from "../component/home/IA.tsx"
+import Verrous from '../component/home/verrousScientifique.tsx';
+import background from "../assets/FOND-FILAIRE-LUEUR-GAUCHE.jpg";
+import background2 from "../assets/uploads/2021/04/FOND-1600-x-1200_2.jpg";
 
 const Home: React.FC = () => {
     return (
-        <div className="text-white min-h-screen flex flex-col bg-gray-900">
+        <div 
+            className="text-white min-h-screen flex flex-col bg-gray-900"
+            style={{ backgroundImage: `url(${background})`, backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}
+        >
             {/* Hero Section */}
             <section className="relative text-center overflow-hidden py-16 md:py-24 bg-black">
                 <div className="absolute inset-0 z-0 bg-black"></div>
@@ -35,18 +41,28 @@ const Home: React.FC = () => {
             </section>
 
             {/* About Us and Recent Projects */}
-            <section className="py-16 bg-gray-900">
+            <section className="relative text-center overflow-hidden py-16 md:py-24">
                 <div className="container mx-auto text-center">
                     <div className="mb-12 flex justify-center">
-                        <div className="w-full md:w-1/2"> {/* Limit width to half on medium screens and above */}
+                        <div className="w-full md:w-3/4"> {/* Limit width to half on medium screens and above */}
                             <AboutUs />
                         </div>
                     </div>
                     <div className="mb-12 flex justify-center">
-                        <div className="w-full md:w-1/2"> {/* Limit width to half on medium screens and above */}
+                        <div className="w-full md:w-3/4 flex flex-wrap"> {/* Limit width to three quarters on medium screens and above */}
                             <IA />
                         </div>
                     </div>
+                    <section 
+                        className="relative text-center overflow-hidden py-16 md:py-24"
+                        style={{ backgroundImage: `url(${background2})`, backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}
+                    >
+                        <div className="mb-12 flex justify-center">
+                            <div className="w-full md:w-3/4"> {/* Limit width to three quarters on medium screens and above */}
+                                <Verrous />
+                            </div>
+                        </div>
+                    </section>
                     <h2 className="text-2xl font-semibold mb-8 text-lime-400 animate-slide-in-right">
                         Nos Projets Récents
                     </h2>

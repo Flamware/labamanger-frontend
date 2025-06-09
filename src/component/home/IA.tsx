@@ -34,8 +34,8 @@ const IA = () => {
     const youtubeVideoUrl = "https://youtube.com/embed/AVJoTcCX9qw"; // Replace with your actual YouTube embed URL
 
   return (
-    <section className="py-16 bg-gray-900 text-white">
-      <div className="container mx-auto px-4">
+    <section className="py-16 text-white">
+      <div className="w-full md:w-2/3 mx-auto">
         <h2 className="text-4xl font-bold text-lime-400 text-center mb-8 animate-fade-down">
           qu'est-ce qu'une Intelligence Artificielle ?
         </h2>
@@ -62,7 +62,8 @@ const IA = () => {
             <span className="font-semibold text-lime-400">Notre préférée est celle de la recette de cuisine en 3 étapes : Les ingrédients, la préparation et la recette !</span>
           </p>
         </div>
-
+      </div>
+      <div className="container mx-auto px-4">
         {/* Accordion grid layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <CustomAccordion title="Les Ingrédients">

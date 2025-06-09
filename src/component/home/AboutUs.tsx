@@ -4,8 +4,8 @@ const AboutUs: React.FC = () => {
     const youtubeVideoUrl = "https://www.youtube.com/embed/SH6WxV_7k8A"; // Replace with your actual YouTube embed URL
 
     return (
-        <section className="py-16 bg-gray-900 text-white">
-            <div className="container mx-auto px-4">
+        <section className="py-16 text-white">
+            <div className="w-full md:w-2/3 mx-auto">
                 <h2 className="text-4xl font-bold text-lime-400 text-center mb-8 animate-fade-down">
                     QUI SOMMES NOUS ?
                 </h2>
@@ -38,7 +38,8 @@ const AboutUs: React.FC = () => {
                         pour accélérer l'innovation et relever les défis de l'industrie du futur.
                     </p>
                 </div>
-
+            </div>
+            <div className="container mx-auto px-4">
                 {/* Placeholder for YouTube Video */}
                 <div className="w-full rounded-3xl overflow-hidden shadow-md">
                     <iframe
