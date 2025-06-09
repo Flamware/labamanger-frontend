@@ -1,11 +1,13 @@
 import React from 'react';
+import background from "../assets/FOND-FILAIRE-LUEUR-GAUCHE.jpg";
+import background2 from "../assets/uploads/2021/04/FOND-1600-x-1200_2.jpg";
 import ContactCarousel from '../component/home/ContactCarousel.tsx';
 import AboutUs from "../component/home/AboutUs.tsx";
 import Footer from "../component/Footer.tsx"; // Assuming ContactCarousel.tsx is in the same directory
 import IA from "../component/home/IA.tsx"
 import Verrous from '../component/home/verrousScientifique.tsx';
-import background from "../assets/FOND-FILAIRE-LUEUR-GAUCHE.jpg";
-import background2 from "../assets/uploads/2021/04/FOND-1600-x-1200_2.jpg";
+import ChampApplication from "../component/home/champsApplications.tsx"
+
 
 const Home: React.FC = () => {
     return (
@@ -63,6 +65,18 @@ const Home: React.FC = () => {
                             </div>
                         </div>
                     </section>
+                    <div className="mb-12 flex justify-center">
+                        <div className="w-full md:w-3/4"> {/* Limit width to half on medium screens and above */}
+                            <ChampApplication />
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    
                     <h2 className="text-2xl font-semibold mb-8 text-lime-400 animate-slide-in-right">
                         Nos Projets Récents
                     </h2>

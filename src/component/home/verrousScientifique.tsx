@@ -1,7 +1,7 @@
 const verrous = () => {
     return(
         <section >
-            <h2 className="text-4xl font-bold text-lime-400 text-center mb-8 animate-fade-down">
+            <h2 className="text-4xl white text-center mb-8 animate-fade-down">
                 Nos verrous scientifiques
             </h2>
             {/* Example Project Cards (Replace with your actual data/components) */}
