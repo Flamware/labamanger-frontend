@@ -5,6 +5,7 @@ import ORCIDProfile from '../component/Person/ORCIDProfile';
 import Project from '../component/Person/Projet';
 import { useParams } from 'react-router-dom';
 import SupervisionsContent from '../component/Person/Supervision';
+import JuryContent from '../component/Person/Jury';
 
 const Person: React.FC = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
@@ -25,18 +26,6 @@ const Person: React.FC = () => {
       <ul className="list-disc pl-5">
         <li>Talk 1</li>
         <li>Talk 2</li>
-      </ul>
-    </div>
-  );
-
-
-
-  const JuryContent = () => (
-    <div className="text-gray-800">
-      <h3 className="font-bold">Jury Participation</h3>
-      <ul className="list-disc pl-5">
-        <li>Conference A - 2023</li>
-        <li>Conference B - 2023</li>
       </ul>
     </div>
   );
@@ -142,7 +131,7 @@ return (
           {activeTab === 'publications' && <PublicationsContent />}
           {activeTab === 'projects' && id && <Project userId={Number(id)}/>}
           {activeTab === 'supervisions' && id && <SupervisionsContent userId={Number(id)}/>}
-          {activeTab === 'jury' && <JuryContent />}
+          {activeTab === 'jury' && <JuryContent userId={Number(id)}/>}
           {activeTab === 'invitations' && <InvitationsContent />}
           {activeTab === 'teaching' && <TeachingContent />}
         </div>
