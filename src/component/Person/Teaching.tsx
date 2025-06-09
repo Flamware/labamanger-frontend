@@ -12,7 +12,7 @@ function Jury({ userId }: { userId: number }) {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://localhost:8080/LabManager/api/v4/persons/jurys?id=${userId}`);
+      const response = await fetch(`https://localhost:8080/LabManager/api/v4/persons/getTeaching/${userId}`);
       if (!response.ok) throw new Error('Failed to fetch projects data');
       let dataFetched = await response.json();
       
@@ -37,20 +37,13 @@ function Jury({ userId }: { userId: number }) {
 
 
 
-  const columns = [
-    { data: 'candidate.name', title: 'Candidate Name' ,
-      render: (data: any, type: string, row: any) => {
-        if (type === 'display') {
-          return `<a href="/Person/${row.candidateId}">${data}</a>`;
-        }
-        return data;
-      }},
-    { data: 'title', title: 'Title' },
-    { data: 'university.name', title: 'University' },
-    { data: 'university.country', title: 'Country' },
-    { data: 'year', title: 'Year' },
+    const columns = [
+        { data: 'code', title: 'Code' },
+        { data: 'title', title: 'Title' },
+        { data: 'degree', title: 'Degree' },
+        { data: 'university.name', title: 'University Name' },
 
-  ];
+    ];
   return (
     
     <pre>
@@ -58,11 +51,11 @@ function Jury({ userId }: { userId: number }) {
         <DataTable data={data} columns={columns} className="display">
           <thead>
             <tr>
-                <th>Candidate Name</th>
+                <th>Code</th>
                 <th>Title</th>
-                <th>University</th>
-                <th>Country</th>
-                <th>Year</th>
+                <th>Degree</th>
+                <th>University Name</th>
+
 
 
             </tr>

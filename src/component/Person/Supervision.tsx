@@ -35,18 +35,20 @@ function Supervisions({ userId }: { userId: number }) {
     return <p>Error: {error}</p>;
   }
 
-interface Supervisor {
-    person: {
-        name: string;
-    };
-}
+
 
 const columns: {
     data: string;
     title: string;
-    render?: (data: any) => string;
+    render?: (data: any, type?: any, row?: any) => string;
 }[] = [
-        { data: 'supervisedPerson.name', title: 'Supervisé' },
+    { data: 'supervisedPerson.name', title: 'Supervisé' ,
+      render: (data: any, type: string, row: any) => {
+        if (type === 'display') {
+          return `<a href="/Person/${row.supervisedPersonId}">${data}</a>`;
+        }
+        return data;
+      }},
     { data: 'name', title: 'Projet' },
 
     { data: 'year', title: 'Year' },

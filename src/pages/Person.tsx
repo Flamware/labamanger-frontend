@@ -6,6 +6,9 @@ import Project from '../component/Person/Projet';
 import { useParams } from 'react-router-dom';
 import SupervisionsContent from '../component/Person/Supervision';
 import JuryContent from '../component/Person/Jury';
+import Invitation from '../component/Person/Invitation';
+import Teaching from '../component/Person/Teaching';
+
 
 const Person: React.FC = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
@@ -26,26 +29,6 @@ const Person: React.FC = () => {
       <ul className="list-disc pl-5">
         <li>Talk 1</li>
         <li>Talk 2</li>
-      </ul>
-    </div>
-  );
-
-  const InvitationsContent = () => (
-    <div className="text-gray-800">
-      <h3 className="font-bold">Invited Talks</h3>
-      <ul className="list-disc pl-5">
-        <li>University X - Guest Lecture on AI</li>
-        <li>Conference Y - Keynote on Future Technologies</li>
-      </ul>
-    </div>
-  );
-
-  const TeachingContent = () => (
-    <div className="text-gray-800">
-      <h3 className="font-bold">Courses Taught</h3>
-      <ul className="list-disc pl-5">
-        <li>Introduction to Artificial Intelligence</li>
-        <li>Advanced Machine Learning</li>
       </ul>
     </div>
   );
@@ -115,7 +98,7 @@ return (
         <div className="flex justify-center my-4">
           <img className="w-32 h-32 rounded-full" src={profileData.photo || 'default-profile.png'} alt="Profile" />
         </div>
-        <div className="flex justify-around border-b border-gray-200">
+        <div className="flex justify-around border-gray-200">
           <button className={`py-2 px-4 ${activeTab === 'bio' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('bio')}>Bio</button>
           <button className={`py-2 px-4 ${activeTab === 'publications' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('publications')}>Publications & Talks</button>
           <button className={`py-2 px-4 ${activeTab === 'projects' ? 'border-b-2 border-cyan-300-500 text-gray-200 bg-gray-700' : 'text-gray-500 bg-gray-100'}`} onClick={() => setActiveTab('projects')}>Projects</button>
@@ -132,8 +115,8 @@ return (
           {activeTab === 'projects' && id && <Project userId={Number(id)}/>}
           {activeTab === 'supervisions' && id && <SupervisionsContent userId={Number(id)}/>}
           {activeTab === 'jury' && <JuryContent userId={Number(id)}/>}
-          {activeTab === 'invitations' && <InvitationsContent />}
-          {activeTab === 'teaching' && <TeachingContent />}
+          {activeTab === 'invitations' && <Invitation userId={Number(id)}/>}
+          {activeTab === 'teaching' && <Teaching userId={Number(id)} />}
         </div>
       </div>
     </div>
