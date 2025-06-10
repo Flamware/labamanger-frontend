@@ -7,6 +7,10 @@ import Footer from "../component/Footer.tsx"; // Assuming ContactCarousel.tsx is
 import IA from "../component/home/IA.tsx"
 import Verrous from '../component/home/verrousScientifique.tsx';
 import ChampApplication from "../component/home/champsApplications.tsx"
+import ProjectCarousel from "../component/home/projectCarousel.tsx"
+import ChiffreCles from "../component/home/chiffresCles.tsx"
+import ProcessusInno from "../component/home/processusInno.tsx"
+import PartenaireCarousel from "../component/home/partenaireCarousel.tsx"
 
 
 const Home: React.FC = () => {
@@ -42,7 +46,7 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            {/* About Us and Recent Projects */}
+            {/* About Us, IA, Verrous Scientifique and Champs d'applications parts */}
             <section className="relative text-center overflow-hidden py-16 md:py-24">
                 <div className="container mx-auto text-center">
                     <div className="mb-12 flex justify-center">
@@ -70,38 +74,39 @@ const Home: React.FC = () => {
                             <ChampApplication />
                         </div>
                     </div>
-
-
-
-
-
-
-                    
-                    <h2 className="text-2xl font-semibold mb-8 text-lime-400 animate-slide-in-right">
-                        Nos Projets Récents
-                    </h2>
-                    {/* Add a component or content showcasing recent projects */}
-                    <p className="text-gray-300 mb-8 animate-fade-in">
-                        Explorez nos dernières initiatives et réalisations qui repoussent les limites de l'IA distribuée.
-                    </p>
-                    {/* Example Project Cards (Replace with your actual data/components) */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div className="bg-gray-800 rounded-lg shadow-md p-6 animate-slide-up delay-100">
-                            <h3 className="font-semibold text-lg text-white mb-2">Projet IoT Intelligent</h3>
-                            <p className="text-gray-400 text-sm">Développement d'une plateforme IoT pour la gestion intelligente des ressources urbaines.</p>
-                        </div>
-                        <div className="bg-gray-800 rounded-lg shadow-md p-6 animate-slide-up delay-200">
-                            <h3 className="font-semibold text-lg text-white mb-2">Food Tech Innovation</h3>
-                            <p className="text-gray-400 text-sm">Application de l'IA pour optimiser la production et la distribution alimentaire.</p>
-                        </div>
-                        <div className="bg-gray-800 rounded-lg shadow-md p-6 animate-slide-up delay-300">
-                            <h3 className="font-semibold text-lg text-white mb-2">eHealth System Distribué</h3>
-                            <p className="text-gray-400 text-sm">Conception d'un système de santé distribué pour un suivi patient personnalisé.</p>
-                        </div>
+                </div>
+            </section>
+            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
+                <div className="mb-12 flex justify-center">
+                    <div className="w-full"> {/* Limit width to half on medium screens and above */}
+                        <ProjectCarousel />
                     </div>
                 </div>
             </section>
-            <Footer/>
+            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
+                <div className="mb-12 flex justify-center">
+                    <div className="w-full"> {/* Limit width to half on medium screens and above */}
+                        <ChiffreCles />
+                    </div>
+                </div>
+            </section>
+            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
+                <div className="mb-12 flex justify-center">
+                    <div className="w-full"> {/* Limit width to half on medium screens and above */}
+                        <ProcessusInno />
+                    </div>
+                </div>
+            </section>
+            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
+                <div className="mb-12 flex justify-center">
+                    <div className="w-full"> {/* Limit width to half on medium screens and above */}
+                        <PartenaireCarousel />
+                    </div>
+                </div>
+            </section>
+            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
+                <Footer isBlack />
+            </section>
 
         </div>
     );

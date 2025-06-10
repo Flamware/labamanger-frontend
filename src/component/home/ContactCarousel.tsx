@@ -105,7 +105,6 @@ const slides = [
   },
 ];
 
-
 const FullScreenCarousel = () => {
   const settings = {
   infinite: true,
