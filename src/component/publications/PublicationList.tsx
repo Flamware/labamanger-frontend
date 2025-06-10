@@ -36,10 +36,10 @@ const PublicationList: React.FC<Props> = ({ publications, expandedIndex, toggleE
                 return (
                     <div
                         key={index}
-                        className="bg-gray-800 rounded-xl shadow-md p-6 mb-6 cursor-pointer"
+                        className="bg-gray-800 rounded-xl shadow-md p-6 mb-6 cursor-pointer break-words hover:bg-gray-700 transition-colors duration-200"
                         onClick={() => toggleExpand(index)}
                     >
-                        <h2 className="text-green-600 text-lg font-semibold mb-2">{pub.title}</h2>
+                        <h2 className="text-green-600 text-lg font-semibold mb-2 break-words text-center">{pub.title}</h2>
                         <div className="text-white-200 text-md font-semibold mb-2">
                            {pub.persons.map(p => p.name).join(', ')}
                         </div>

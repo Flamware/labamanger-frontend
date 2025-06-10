@@ -3,15 +3,14 @@ import DataTable from 'datatables.net-react';
 import DT from 'datatables.net-dt';
 import 'datatables.net-responsive-dt';
 import 'datatables.net-select-dt';
-import Footer from '../Footer.tsx';
-import { usePublications } from '../../hooks/usePublications.tsx';
+import { usePublicationsPerson } from '../../hooks/usePublicationsPerson.tsx';
 import PublicationFilters from '../publications/PublicationFilters.tsx';
 import PublicationList from '../publications/PublicationList.tsx';
 
 DataTable.use(DT);
 
-function Jury({ userId }: { userId: number }) {
-  const { publications, loading, error } = usePublications();
+function Publication({ userId }: { userId: number }) {
+  const { publications, loading, error } = usePublicationsPerson(userId);
       const [yearFilter, setYearFilter] = useState('Tous');
       const [typeFilter, setTypeFilter] = useState('Tous');
       const [authorFilter, setAuthorFilter] = useState('Tous');
@@ -116,7 +115,7 @@ function Jury({ userId }: { userId: number }) {
                   {!loading && filteredPublications.length === 0 && (
                       <p className="text-white-300">Aucune publication ne correspond aux filtres sélectionnés.</p>
                   )}
-  
+                    
                   <PublicationList
                       publications={filteredPublications}
                       expandedIndex={expandedIndex}
@@ -128,4 +127,4 @@ function Jury({ userId }: { userId: number }) {
   );
 }
 
-export default Jury;
+export default Publication;
