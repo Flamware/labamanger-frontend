@@ -1,68 +1,130 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import DataTable from 'datatables.net-react';
 import DT from 'datatables.net-dt';
 import 'datatables.net-responsive-dt';
 import 'datatables.net-select-dt';
+import Footer from '../Footer.tsx';
+import { usePublications } from '../../hooks/usePublications.tsx';
+import PublicationFilters from '../publications/PublicationFilters.tsx';
+import PublicationList from '../publications/PublicationList.tsx';
 
 DataTable.use(DT);
 
 function Jury({ userId }: { userId: number }) {
-  const [data, setData] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`https://localhost:8080/LabManager/api/v4/persons/getTeaching/${userId}`);
-      if (!response.ok) throw new Error('Failed to fetch projects data');
-      let dataFetched = await response.json();
-      
-      const data = dataFetched
-      setData(data);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError(String(err));
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [userId]);
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
-
-
-    const columns = [
-        { data: 'code', title: 'Code' },
-        { data: 'title', title: 'Title' },
-        { data: 'degree', title: 'Degree' },
-        { data: 'university.name', title: 'University Name' },
-
-    ];
-  return (
-    
-    <pre>
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
-        <DataTable data={data} columns={columns} className="display">
-          <thead>
-            <tr>
-                <th>Code</th>
-                <th>Title</th>
-                <th>Degree</th>
-                <th>University Name</th>
-
-
-
-            </tr>
-          </thead>
-        </DataTable>
-
-    </pre>
+  const { publications, loading, error } = usePublications();
+      const [yearFilter, setYearFilter] = useState('Tous');
+      const [typeFilter, setTypeFilter] = useState('Tous');
+      const [authorFilter, setAuthorFilter] = useState('Tous');
+      const [search, setSearch] = useState('');
+      const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  
+      const toggleExpand = (index: number) => {
+          setExpandedIndex(prev => (prev === index ? null : index));
+      };
+  
+      const resetFilters = () => {
+          setYearFilter('Tous');
+          setTypeFilter('Tous');
+          setAuthorFilter('Tous');
+          setSearch('');
+      };
+  
+      const filteredPublications = useMemo(() => {
+          return publications.filter(pub => {
+              const year = new Date(pub.publicationDate).getFullYear().toString();
+              const authorNames = pub.persons.map(p => p.name);
+  
+              const matchYear = yearFilter === 'Tous' || year === yearFilter;
+              const matchType = typeFilter === 'Tous' || pub.publicationType === typeFilter;
+              const matchAuthor = authorFilter === 'Tous' || authorNames.includes(authorFilter);
+              const matchSearch =
+                  search === '' ||
+                  pub.title.toLowerCase().includes(search.toLowerCase()) ||
+                  pub.keywords.some(k => k.toLowerCase().includes(search.toLowerCase()));
+  
+              return matchYear && matchType && matchAuthor && matchSearch;
+          });
+      }, [publications, yearFilter, typeFilter, authorFilter, search]);
+  
+      const filterOptions = useMemo(() => {
+          const yearCount: Record<string, number> = {};
+          const typeCount: Record<string, number> = {};
+          const authorCount: Record<string, number> = {};
+  
+          publications.forEach(pub => {
+              const year = new Date(pub.publicationDate).getFullYear().toString();
+              const type = pub.publicationType;
+              const authorNames = pub.persons.map(p => p.name);
+  
+              const matchSearch =
+                  search === '' ||
+                  pub.title.toLowerCase().includes(search.toLowerCase()) ||
+                  pub.keywords.some(k => k.toLowerCase().includes(search.toLowerCase()));
+  
+              const matchYear = yearFilter === 'Tous' || year === yearFilter;
+              const matchType = typeFilter === 'Tous' || type === typeFilter;
+              const matchAuthor = authorFilter === 'Tous' || authorNames.includes(authorFilter);
+  
+              if (matchType && matchAuthor && matchSearch) {
+                  yearCount[year] = (yearCount[year] || 0) + 1;
+              }
+              if (matchYear && matchAuthor && matchSearch) {
+                  typeCount[type] = (typeCount[type] || 0) + 1;
+              }
+              if (matchYear && matchType && matchSearch) {
+                  authorNames.forEach(name => {
+                      authorCount[name] = (authorCount[name] || 0) + 1;
+                  });
+              }
+          });
+  
+          const toFilterArray = (obj: Record<string, number>) =>
+              Object.entries(obj).map(([value, count]) => ({
+                  value,
+                  label: value,
+                  count,
+              }));
+  
+          return {
+              years: toFilterArray(yearCount).sort((a, b) => parseInt(b.value) - parseInt(a.value)),
+              types: toFilterArray(typeCount).sort((a, b) => a.label.localeCompare(b.label)),
+              authors: toFilterArray(authorCount).sort((a, b) => a.label.localeCompare(b.label)),
+          };
+      }, [publications, yearFilter, typeFilter, authorFilter, search]);
+  
+      return (
+        <pre>
+          <div className="text-white flex flex-col bg-gray-900 min-h-screen">
+              <main className="flex-grow container mx-auto px-4 py-8">
+                  <PublicationFilters
+                      yearFilter={yearFilter}
+                      typeFilter={typeFilter}
+                      authorFilter={authorFilter}
+                      onYearChange={setYearFilter}
+                      onTypeChange={setTypeFilter}
+                      onAuthorChange={setAuthorFilter}
+                      onSearchChange={setSearch}
+                      onResetFilters={resetFilters}
+                      search={search}
+                      years={filterOptions.years}
+                      types={filterOptions.types}
+                      authors={filterOptions.authors}
+                  />
+  
+                  {loading && <p className="text-gray-300">Chargement...</p>}
+                  {error && <p className="text-red-400">{error}</p>}
+                  {!loading && filteredPublications.length === 0 && (
+                      <p className="text-white-300">Aucune publication ne correspond aux filtres sélectionnés.</p>
+                  )}
+  
+                  <PublicationList
+                      publications={filteredPublications}
+                      expandedIndex={expandedIndex}
+                      toggleExpand={toggleExpand}
+                  />
+              </main>
+          </div>
+          </pre>
   );
 }
 

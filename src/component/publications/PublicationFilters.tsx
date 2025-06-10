@@ -43,10 +43,13 @@ const PublicationFilters: React.FC<Props> = ({
             value={search}
             onChange={e => onSearchChange(e.target.value)}
         />
+        <label htmlFor="year-filter" className="sr-only">Filtrer par année</label>
         <select
+            id="year-filter"
             className="bg-gray-800 text-white p-2 rounded"
             value={yearFilter}
             onChange={e => onYearChange(e.target.value)}
+            aria-label="Filtrer par année"
         >
             <option value="Tous">Tous les ans</option>
             {years.map(({ value, label, count }) => (
@@ -55,10 +58,13 @@ const PublicationFilters: React.FC<Props> = ({
                 </option>
             ))}
         </select>
+        <label htmlFor="type-filter" className="sr-only">Filtrer par type</label>
         <select
+            id="type-filter"
             className="bg-gray-800 text-white p-2 rounded"
             value={typeFilter}
             onChange={e => onTypeChange(e.target.value)}
+            aria-label="Filtrer par type"
         >
             <option value="Tous">Tous les types</option>
             {types.map(({ value, label, count }) => (
@@ -67,10 +73,13 @@ const PublicationFilters: React.FC<Props> = ({
                 </option>
             ))}
         </select>
+        <label htmlFor="author-filter" className="sr-only">Filtrer par auteur</label>
         <select
+            id="author-filter"
             className="bg-gray-800 text-white p-2 rounded"
             value={authorFilter}
             onChange={e => onAuthorChange(e.target.value)}
+            aria-label="Filtrer par auteur"
         >
             <option value="Tous">Tous les auteurs</option>
             {authors.map(({ value, label, count }) => (
