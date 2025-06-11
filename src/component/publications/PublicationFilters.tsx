@@ -35,9 +35,9 @@ const PublicationFilters: React.FC<Props> = ({
     authors,
     search,
 }) => (
-    <div className="flex flex-wrap gap-4 mb-8 items-center">
+    <div className="flex flex-row flex-nowrap gap-4 mb-8 items-center w-full overflow-x-auto">
         <input
-            className="bg-gray-800 text-white p-2 rounded w-full md:w-64"
+            className="bg-gray-800 text-white p-2 rounded w-56 min-w-[180px]"
             type="text"
             placeholder="Rechercher par titre ou mot-clé..."
             value={search}
@@ -46,7 +46,7 @@ const PublicationFilters: React.FC<Props> = ({
         <label htmlFor="year-filter" className="sr-only">Filtrer par année</label>
         <select
             id="year-filter"
-            className="bg-gray-800 text-white p-2 rounded"
+            className="bg-gray-800 text-white p-2 rounded min-w-[150px]"
             value={yearFilter}
             onChange={e => onYearChange(e.target.value)}
             aria-label="Filtrer par année"
@@ -61,7 +61,7 @@ const PublicationFilters: React.FC<Props> = ({
         <label htmlFor="type-filter" className="sr-only">Filtrer par type</label>
         <select
             id="type-filter"
-            className="bg-gray-800 text-white p-2 rounded"
+            className="bg-gray-800 text-white p-2 rounded min-w-[180px]"
             value={typeFilter}
             onChange={e => onTypeChange(e.target.value)}
             aria-label="Filtrer par type"
@@ -76,7 +76,7 @@ const PublicationFilters: React.FC<Props> = ({
         <label htmlFor="author-filter" className="sr-only">Filtrer par auteur</label>
         <select
             id="author-filter"
-            className="bg-gray-800 text-white p-2 rounded"
+            className="bg-gray-800 text-white p-2 rounded min-w-[180px]"
             value={authorFilter}
             onChange={e => onAuthorChange(e.target.value)}
             aria-label="Filtrer par auteur"
@@ -88,10 +88,9 @@ const PublicationFilters: React.FC<Props> = ({
                 </option>
             ))}
         </select>
-
         <button
             onClick={onResetFilters}
-            className="bg-red-600 hover:bg-red-700 text-white p-2 rounded"
+            className="bg-red-600 hover:bg-red-700 text-white p-2 rounded whitespace-nowrap min-w-[180px]"
         >
             Réinitialiser les filtres
         </button>

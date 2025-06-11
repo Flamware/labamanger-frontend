@@ -1,6 +1,6 @@
-export interface PersonOnWebsite {
+export interface PublicationsAuthors {
     name: string;
-    webPageId: string; // TODO voir avec Kevin pour la page person
+    id: number;
 }
 
 export interface PublicationsDTO {
@@ -9,7 +9,7 @@ export interface PublicationsDTO {
     issn: string;
     publicationDate: string;
     publicationType: string;
-    persons: PersonOnWebsite[];
+    persons: PublicationsAuthors[];
     abstractText: string;
     extraUrl: string;
     dblpUrl: string;

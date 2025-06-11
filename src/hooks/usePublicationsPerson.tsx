@@ -9,7 +9,7 @@ export const usePublicationsPerson = (userId: number) => {
     useEffect(() => {
         const fetchPublications = async () => {
             try {
-                const response = await fetch(`https://localhost:8080/LabManager/api/v4/publications/persons?id=${userId}`);
+                const response = await fetch(`https://localhost:8080/LabManager/api/v4/publications/frontpersons?id=${userId}`);
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
                 }
