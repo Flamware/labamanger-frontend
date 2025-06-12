@@ -1,28 +1,30 @@
 import React from 'react';
 import { AiOutlineFilePdf } from 'react-icons/ai';
 import { SiDblp } from 'react-icons/si';
+import { PublicationsDTO } from '../../models/publications';
 
-interface Person {
-    name: string;
-}
+// interface Person {
+//     id: number;
+//     name: string;
+// }
 
-interface Publication {
-    title: string;
-    issn: string;
-    publicationType: string;
-    language: string;
-    abstractText: string;
-    publicationDate: string;
-    pdfUrl?: string;
-    extraUrl?: string;
-    dblpUrl?: string;
-    awardCertificate?: string;
-    keywords: string[];
-    persons: Person[];
-}
+// interface Publication {
+//     title: string;
+//     issn: string;
+//     publicationType: string;
+//     language: string;
+//     abstractText: string;
+//     publicationDate: string;
+//     pdfUrl?: string;
+//     extraUrl?: string;
+//     dblpUrl?: string;
+//     awardCertificate?: string;
+//     keywords: string[];
+//     persons: Person[];
+// }
 
 interface Props {
-    publications: Publication[];
+    publications: PublicationsDTO[];
     expandedIndex: number | null;
     toggleExpand: (index: number) => void;
 }
@@ -36,13 +38,25 @@ const PublicationList: React.FC<Props> = ({ publications, expandedIndex, toggleE
                 return (
                     <div
                         key={index}
-                        className="bg-gray-800 rounded-xl shadow-md p-6 mb-6 cursor-pointer"
+                        className="bg-gray-800 rounded-xl shadow-md p-6 mb-6 cursor-pointer break-words hover:bg-gray-700 transition-colors duration-200"
                         onClick={() => toggleExpand(index)}
                     >
-                        <h2 className="text-green-600 text-lg font-semibold mb-2">{pub.title}</h2>
-                        <div className="text-white-200 text-md font-semibold mb-2">
-                           {pub.persons.map(p => p.name).join(', ')}
+                        <h2 className="text-green-600 text-lg font-semibold mb-2 break-words">{pub.title}</h2>
+                        <div className="text-white text-md font-semibold mb-2 flex flex-wrap gap-1">
+                            {pub.persons.map((p, i) => (
+                                <span key={p.id}>
+                                    <a
+                                        href={`/person/${p.id}`}
+                                        className="text-blue-400 hover:underline"
+                                        onClick={e => e.stopPropagation()} // pour ne pas déclencher le toggleExpand
+                                    >
+                                        {p.name}
+                                    </a>
+                                    {i < pub.persons.length - 1 && ','}
+                                </span>
+                            ))}
                         </div>
+
                         <p className="text-gray-400 text-sm mb-2">
                             ISSN {pub.issn}. {pub.publicationDate}.
                         </p>

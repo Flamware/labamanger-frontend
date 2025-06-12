@@ -29,22 +29,6 @@ function Equipe() {
     }
   };
 
-  const [tableData] = useState([
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-    ['Tiger Nixon'],
-  ]);
-
   useEffect(() => {
     console.log("Fetching data...");
     fetchData();
