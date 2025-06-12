@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from '../../assets/PROCESSUS-DE-SOUTIEN-A-LINNOVATION-1600-x-1200.jpg'; // Remplace ce chemin par le tien
 
-const ProcInno: React.FC = () => {
+const InnoProcessus: React.FC = () => {
     return (
         <section className="py-16 text-white">
             <div className="w-full md:w-2/3 mx-auto">
@@ -23,4 +23,4 @@ const ProcInno: React.FC = () => {
     );
 };
 
-export default ProcInno;
+export default InnoProcessus;

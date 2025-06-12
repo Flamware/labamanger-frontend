@@ -64,7 +64,7 @@ const ProjectCarousel = () => {
         <ul className="flex justify-center space-x-2 mt-4">{dots}</ul>
       </div>
     ),
-    customPaging: (i: number) => (
+    customPaging: () => (
       <button className="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition" />
     ),
   };

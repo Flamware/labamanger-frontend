@@ -95,7 +95,7 @@ const ProjectCarousel = () => {
   return (
     <div className="w-full py-12 bg-black relative">
       <h2 className="text-4xl text-lime-400 text-center mb-8 animate-fade-down">
-        Nos projets
+        Nos partenaires
       </h2>
 
       <Slider {...settings}>

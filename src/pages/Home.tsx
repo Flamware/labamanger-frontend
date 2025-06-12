@@ -3,14 +3,14 @@ import background from "../assets/FOND-FILAIRE-LUEUR-GAUCHE.jpg";
 import background2 from "../assets/uploads/2021/04/FOND-1600-x-1200_2.jpg";
 import ContactCarousel from '../component/home/ContactCarousel.tsx';
 import AboutUs from "../component/home/AboutUs.tsx";
-import Footer from "../component/Footer.tsx"; // Assuming ContactCarousel.tsx is in the same directory
-import IA from "../component/home/IA.tsx"
-import Verrous from '../component/home/verrousScientifique.tsx';
-import ChampApplication from "../component/home/champsApplications.tsx"
-import ProjectCarousel from "../component/home/projectCarousel.tsx"
-import ChiffreCles from "../component/home/chiffresCles.tsx"
-import ProcessusInno from "../component/home/processusInno.tsx"
-import PartenaireCarousel from "../component/home/partenaireCarousel.tsx"
+import Footer from "../component/Footer.tsx";
+import AI from "../component/home/AI.tsx"
+import Science from '../component/home/ScientificLock.tsx';
+import Application from "../component/home/ApplicationField.tsx"
+import ProjectCarousel from '../component/home/HomeProjectCarousel.tsx';
+import KeyNumbers from "../component/home/KeyNumbers.tsx"
+import InnovProcessus from "../component/home/InnovativeProcessus.tsx"
+import PartnerCarousel from "../component/home/PartnerCarousel.tsx"
 
 
 const Home: React.FC = () => {
@@ -35,7 +35,6 @@ const Home: React.FC = () => {
                     </button> */}
                 </div>
             </section>
-
             {/* Contact Information Carousel */}
             <section className="w-full flex justify-center py-8 md:py-12 bg-gradient-to-b from-black">
                 <div className="container">
@@ -45,8 +44,7 @@ const Home: React.FC = () => {
                     <ContactCarousel />
                 </div>
             </section>
-
-            {/* About Us, IA, Verrous Scientifique and Champs d'applications parts */}
+            {/* About Us, IA, Science and Application parts */}
             <section className="relative text-center overflow-hidden py-16 md:py-24">
                 <div className="container mx-auto text-center">
                     <div className="mb-12 flex justify-center">
@@ -56,7 +54,7 @@ const Home: React.FC = () => {
                     </div>
                     <div className="mb-12 flex justify-center">
                         <div className="w-full md:w-3/4 flex flex-wrap"> {/* Limit width to three quarters on medium screens and above */}
-                            <IA />
+                            <AI />
                         </div>
                     </div>
                     <section 
@@ -65,13 +63,13 @@ const Home: React.FC = () => {
                     >
                         <div className="mb-12 flex justify-center">
                             <div className="w-full md:w-3/4"> {/* Limit width to three quarters on medium screens and above */}
-                                <Verrous />
+                                <Science />
                             </div>
                         </div>
                     </section>
                     <div className="mb-12 flex justify-center">
                         <div className="w-full md:w-3/4"> {/* Limit width to half on medium screens and above */}
-                            <ChampApplication />
+                            <Application />
                         </div>
                     </div>
                 </div>
@@ -86,30 +84,28 @@ const Home: React.FC = () => {
             <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
                 <div className="mb-12 flex justify-center">
                     <div className="w-full"> {/* Limit width to half on medium screens and above */}
-                        <ChiffreCles />
+                        <KeyNumbers />
                     </div>
                 </div>
             </section>
             <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
                 <div className="mb-12 flex justify-center">
                     <div className="w-full"> {/* Limit width to half on medium screens and above */}
-                        <ProcessusInno />
+                        <InnovProcessus />
                     </div>
                 </div>
             </section>
             <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
                 <div className="mb-12 flex justify-center">
                     <div className="w-full"> {/* Limit width to half on medium screens and above */}
-                        <PartenaireCarousel />
+                        <PartnerCarousel />
                     </div>
                 </div>
             </section>
             <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
                 <Footer isBlack />
             </section>
-
         </div>
     );
 };
-
 export default Home;

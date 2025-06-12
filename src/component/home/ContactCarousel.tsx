@@ -105,7 +105,7 @@ const slides = [
   },
 ];
 
-const FullScreenCarousel = () => {
+const ContactCarousel = () => {
   const settings = {
   infinite: true,
   speed: 500,
@@ -135,7 +135,7 @@ const FullScreenCarousel = () => {
 
 
   return (
-    <div className="w-screen h-screen overflow-hidden relative">
+    <div className="w-full py-12 relative">
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div key={index} className="relative w-screen h-screen">
@@ -158,4 +158,4 @@ const FullScreenCarousel = () => {
   );
 };
 
-export default FullScreenCarousel;
+export default ContactCarousel;
