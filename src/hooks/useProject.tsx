@@ -1,9 +1,14 @@
 // src/hooks/useProjectDetails.ts
+
 import { useEffect, useState } from 'react';
 import {BackendProject} from "../models/projects.tsx";
 
+// Define the base URL for your image API
+const IMAGE_API_BASE_URL = 'https://localhost:8080/LabManager/api/v4/images/';
+
 /**
- * Custom hook to fetch a single project's details from the backend.
+ * Custom hook to fetch a single project's details from the backend,
+ * and transform image paths into full URLs.
  * @param projectId The ID of the project to fetch.
  * @returns An object containing the fetched project, loading status, and any error.
  */
@@ -14,7 +19,6 @@ export const useProjectDetails = (projectId: string | undefined) => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // If no projectId is provided (e.g., URL is /projects/ instead of /projects/123)
         if (!projectId) {
             setError("No project ID provided.");
             setLoading(false);
@@ -26,12 +30,10 @@ export const useProjectDetails = (projectId: string | undefined) => {
             setError(null); // Clear any previous errors
 
             try {
-                // IMPORTANT: Use your actual API endpoint for a single project
-                // This assumes your API is at https://localhost:8080/LabManager/api/v4/projects/{id}
-                const response = await fetch(`https://localhost:8080/LabManager/api/v4/projects/${projectId}`);
+                // Fetch the project data
+                const response = await fetch(`https://localhost:8080/LabManager/api/v4/projects?id=${projectId}`);
 
                 if (!response.ok) {
-                    // Handle specific HTTP error codes
                     if (response.status === 404) {
                         throw new Error(`Project with ID '${projectId}' not found.`);
                     }
@@ -39,7 +41,20 @@ export const useProjectDetails = (projectId: string | undefined) => {
                 }
 
                 const data: BackendProject = await response.json();
-                setBackendProject(data);
+
+                // --- Image URL Transformation ---
+                // Transform image filenames/paths into full URLs
+                const transformedImages = data.images.map(imageName => IMAGE_API_BASE_URL + imageName);
+                const transformedLogo = data.logo ? IMAGE_API_BASE_URL + data.logo : null;
+
+                // Create a new BackendProject object with the transformed URLs
+                const transformedProject: BackendProject = {
+                    ...data, // Keep all other properties
+                    images: transformedImages, // Override with full image URLs
+                    logo: transformedLogo // Override logo with full URL or null
+                };
+
+                setBackendProject(transformedProject);
             } catch (err) {
                 if (err instanceof Error) {
                     setError(err.message);
