@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from "../assets/uploads/2021/08/LOGOS-CIAD-SEUL-FOND-NOIR-500-px.png"; // Assurez-vous que le chemin est correct
-import ProjectCarousel from "../component/projets/ProjectCarousel.tsx";
-import Footer from "../component/Footer.tsx";
+import ProjectCarousel from "../component/projets/ProjectCarousel";
+import Footer from "../component/Footer";
 
 /**
  * La page des Projets.

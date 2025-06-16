@@ -1,7 +1,7 @@
 import React from 'react';
-import Footer from '../component/Footer.tsx';
-import { usePublications } from '../hooks/usePublications.tsx';
-import PublicationPageContent from '../component/publications/PublicationPageContent.tsx';
+import Footer from '../component/Footer';
+import { usePublications } from '../hooks/usePublications';
+import PublicationPageContent from '../component/publications/PublicationPageContent';
 
 const PublicationsPage: React.FC = () => {
     const { publications, loading, error } = usePublications();

@@ -1,16 +1,16 @@
 import React from 'react';
 import background from "../assets/FOND-FILAIRE-LUEUR-GAUCHE.jpg";
 import background2 from "../assets/uploads/2021/04/FOND-1600-x-1200_2.jpg";
-import ContactCarousel from '../component/home/ContactCarousel.tsx';
-import AboutUs from "../component/home/AboutUs.tsx";
-import Footer from "../component/Footer.tsx";
-import AI from "../component/home/AI.tsx"
-import Science from '../component/home/ScientificLock.tsx';
-import Application from "../component/home/ApplicationField.tsx"
-import ProjectCarousel from '../component/home/HomeProjectCarousel.tsx';
-import KeyNumbers from "../component/home/KeyNumbers.tsx"
-import InnovProcessus from "../component/home/InnovativeProcessus.tsx"
-import PartnerCarousel from "../component/home/PartnerCarousel.tsx"
+import ContactCarousel from '../component/home/ContactCarousel';
+import AboutUs from "../component/home/AboutUs";
+import Footer from "../component/Footer";
+import AI from "../component/home/AI"
+import Science from '../component/home/ScientificLock';
+import Application from "../component/home/ApplicationField"
+import ProjectCarousel from '../component/home/HomeProjectCarousel';
+import KeyNumbers from "../component/home/KeyNumbers"
+import InnovProcessus from "../component/home/InnovativeProcessus"
+import PartnerCarousel from "../component/home/PartnerCarousel"
 
 
 const Home: React.FC = () => {

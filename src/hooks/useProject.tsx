@@ -1,7 +1,7 @@
 // src/hooks/useProjectDetails.ts
 
 import { useEffect, useState } from 'react';
-import {BackendProject} from "../models/projects.tsx";
+import {BackendProject} from "../models/projects";
 
 // Define the base URL for your image API
 const IMAGE_API_BASE_URL = 'https://localhost:8080/LabManager/api/v4/images/';
