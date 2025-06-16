@@ -17,7 +17,7 @@ export const useProjects = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch('https://localhost:8080/LabManager/api/v4/projects/all');
+                const response = await fetch('https://localhost:8080/LabManager/api/v4/projects/all',{});
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
                 }

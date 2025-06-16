@@ -15,12 +15,17 @@ import PartnerCarousel from "../component/home/PartnerCarousel.tsx"
 
 const Home: React.FC = () => {
     return (
-        <div 
+        <div
             className="text-white min-h-screen flex flex-col bg-gray-900"
-            style={{ backgroundImage: `url(${background})`, backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}
+            style={{
+                backgroundImage: `url(${background})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundAttachment: "fixed"
+            }}
         >
             {/* Hero Section */}
-            <section className="relative text-center overflow-hidden py-16 md:py-24 bg-black">
+            <section className="relative text-center overflow-hidden py-4 md:py-8 bg-black">
                 <div className="absolute inset-0 z-0 bg-black"></div>
                 <div className="container mx-auto px-4 relative z-10">
                     <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-lime-400 animate-fade-down animate-delay-100">
@@ -41,7 +46,7 @@ const Home: React.FC = () => {
                     <h2 className="text-2xl font-semibold text-lime-400 text-center mb-6 animate-slide-in-left">
                         Découvrez nos Domaines d'Expertise
                     </h2>
-                    <ContactCarousel />
+                    <ContactCarousel/>
                 </div>
             </section>
             {/* About Us, IA, Science and Application parts */}
@@ -49,62 +54,73 @@ const Home: React.FC = () => {
                 <div className="container mx-auto text-center">
                     <div className="mb-12 flex justify-center">
                         <div className="w-full md:w-3/4"> {/* Limit width to half on medium screens and above */}
-                            <AboutUs />
+                            <AboutUs/>
                         </div>
                     </div>
                     <div className="mb-12 flex justify-center">
-                        <div className="w-full md:w-3/4 flex flex-wrap"> {/* Limit width to three quarters on medium screens and above */}
-                            <AI />
+                        <div
+                            className="w-full md:w-3/4 flex flex-wrap"> {/* Limit width to three quarters on medium screens and above */}
+                            <AI/>
                         </div>
                     </div>
-                    <section 
+                    <section
                         className="relative text-center overflow-hidden py-16 md:py-24"
-                        style={{ backgroundImage: `url(${background2})`, backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}
+                        style={{
+                            backgroundImage: `url(${background2})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            backgroundAttachment: "fixed"
+                        }}
                     >
                         <div className="mb-12 flex justify-center">
-                            <div className="w-full md:w-3/4"> {/* Limit width to three quarters on medium screens and above */}
-                                <Science />
+                            <div
+                                className="w-full md:w-3/4"> {/* Limit width to three quarters on medium screens and above */}
+                                <Science/>
                             </div>
                         </div>
                     </section>
                     <div className="mb-12 flex justify-center">
                         <div className="w-full md:w-3/4"> {/* Limit width to half on medium screens and above */}
-                            <Application />
+                            <Application/>
                         </div>
                     </div>
                 </div>
             </section>
-            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
-                <div className="mb-12 flex justify-center">
-                    <div className="w-full"> {/* Limit width to half on medium screens and above */}
-                        <ProjectCarousel />
+            <div
+                className="relative text-center overflow-hidden py-16 md:py-2 bg-gradient-to-b from-transparent to-black">
+                <section className="relative text-center overflow-hidden py-16 md:py-2 ">
+                    <div className="mb-12 flex justify-center">
+                        <div className="w-full"> {/* Limit width to half on medium screens and above */}
+                            <ProjectCarousel/>
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
-                <div className="mb-12 flex justify-center">
-                    <div className="w-full"> {/* Limit width to half on medium screens and above */}
-                        <KeyNumbers />
+                </section>
+
+                <section className="relative text-center overflow-hidden py-16 md:py-2 ">
+                    <div className="mb-12 flex justify-center">
+                        <div className="w-full"> {/* Limit width to half on medium screens and above */}
+                            <KeyNumbers/>
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
-                <div className="mb-12 flex justify-center">
-                    <div className="w-full"> {/* Limit width to half on medium screens and above */}
-                        <InnovProcessus />
+                </section>
+                <section className="relative text-center overflow-hidden py-16 md:py-2 ">
+                    <div className="mb-12 flex justify-center">
+                        <div className="w-full"> {/* Limit width to half on medium screens and above */}
+                            <InnovProcessus/>
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
-                <div className="mb-12 flex justify-center">
-                    <div className="w-full"> {/* Limit width to half on medium screens and above */}
-                        <PartnerCarousel />
+                </section>
+                <section className="relative text-center overflow-hidden py-16 md:py-2 ">
+                    <div className="mb-12 flex justify-center">
+                        <div className="w-full"> {/* Limit width to half on medium screens and above */}
+                            <PartnerCarousel/>
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section className="relative text-center overflow-hidden py-16 md:py-2 bg-black">
-                <Footer isBlack />
-            </section>
+                </section>
+                <Footer isBlack
+                        easeBlack={true} // New prop to indicate gradient background
+                />
+            </div>
         </div>
     );
 };

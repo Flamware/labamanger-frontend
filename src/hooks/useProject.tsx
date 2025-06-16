@@ -31,7 +31,7 @@ export const useProjectDetails = (projectId: string | undefined) => {
 
             try {
                 // Fetch the project data
-                const response = await fetch(`https://localhost:8080/LabManager/api/v4/projects?id=${projectId}`);
+                const response = await fetch(`https://localhost:8080/LabManager/api/v4/projects?id=${projectId}`,{});
 
                 if (!response.ok) {
                     if (response.status === 404) {

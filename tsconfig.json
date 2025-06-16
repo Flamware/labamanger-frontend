@@ -1,7 +1,18 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "jsx": "react-jsx",          // ⬅️ Enables JSX (use "react" for React < 17)
+    "esModuleInterop": true,     // ⬅️ Fixes import compatibility
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,              // ⬅️ Useful for type-checking only
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
+  },
+  "include": ["src", "tests"],   // ⬅️ Adjust if your tests are elsewhere
+  "exclude": ["node_modules"]
 }
