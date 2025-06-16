@@ -1,53 +1,35 @@
-import { useState, useEffect } from 'react';
-import ConferenceList from "../component/Conference/ConferenceList"
-import { ConferenceData } from '../component/model/ConferenceData';
+import React from 'react';
+import ConferenceList from "../component/Conference/ConferenceList";
+import { useConferences } from '../hooks/useConferences'; // Import the hook
+import Footer from '../component/Footer'; // Assuming Footer component exists
 
-
+/**
+ * The Conferences page component.
+ * It fetches conference data using the useConferences hook and displays it
+ * with a dark theme layout.
+ */
 const Conferences: React.FC = () => {
+  // Use the custom hook to get data and component state
+  const { data, isLoading, error } = useConferences();
 
-  const [data, setData] = useState<ConferenceData[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-
-
-  useEffect(() => {
-    console.log("Fetching data...");
-    fetchData();
-  }, []);
-
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`https://localhost:8080/LabManager/api/v4/conferences/conferenceWithYear`);
-      if (!response.ok) throw new Error('Failed to fetch projects data');
-      let dataFetched = await response.json();
-
-      const data = dataFetched
-      setData(data);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError(String(err));
-      }
-    }
-  };
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
-  return (<div>
-
-    <h1>Conferences, Seminars and Events</h1>
-    <h2>Conferences and Workshops related to CIAD</h2>
-    <ConferenceList conferences={data} />
-  </div>
-
+  // Main container with dark theme and flex column layout
+  return (
+      <div className="text-white flex flex-col bg-gray-900 min-h-screen">
+        <main className="flex-grow container mx-auto px-4 py-8">
+          {/* Conditional rendering based on fetch state */}
+          {isLoading && <p className="text-center text-xl">Chargement des conférences...</p>}
+          {error && <p className="text-center text-xl text-red-400">Erreur : {error}</p>}
+          {data && (
+              <div>
+                <h1 className="text-4xl font-bold mb-4 text-center text-lime-400">Conférences, Séminaires et Événements</h1>
+                <h2 className="text-2xl font-semibold mb-8 text-center text-gray-300">Conférences et Ateliers en lien avec le CIAD</h2>
+                <ConferenceList conferences={data} />
+              </div>
+          )}
+        </main>
+        <Footer />
+      </div>
   );
-
-
-}
-
+};
 
 export default Conferences;

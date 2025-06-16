@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {BackendProject} from "../models/projects.tsx";
 
 export interface Project {
-    id: string; // You might need to generate this on the frontend or have it in the backend response
+    id: number; // You might need to generate this on the frontend or have it in the backend response
     title: string;
     description: string;
     imageUrl: string; // Where does this come from in your backend data?
@@ -34,7 +34,7 @@ export const useProjects = () => {
                     }
 
                     return {
-                        id: backendProject.acronym,
+                        id: backendProject.id,
                         title: backendProject.title,
                         description: backendProject.description || '',
                         imageUrl: backendProject.logo || '',
