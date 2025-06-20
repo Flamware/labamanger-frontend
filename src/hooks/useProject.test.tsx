@@ -83,7 +83,7 @@ describe('useProjectDetails Hook', () => {
     const errorMessage = 'Network error';
 
     (fetch as jest.Mock).mockImplementationOnce(() =>
-      Promise.reject(new Error(errorMessage))
+      Promise.reject(errorMessage) // Throw a string, not an Error object, to trigger the fallback
     );
 
     const { result } = renderHook(() => useProjectDetails('1'));

@@ -6,7 +6,7 @@ import 'datatables.net-select-dt';
 
 DataTable.use(DT);
 
-function Jury({ userId }: { userId: number }) {
+function Teaching({ userId }: { userId: number }) {
   const [data, setData] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -66,4 +66,4 @@ function Jury({ userId }: { userId: number }) {
   );
 }
 
-export default Jury;
+export default Teaching;

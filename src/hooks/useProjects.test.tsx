@@ -53,7 +53,7 @@ describe('useProjects Hook', () => {
         title: 'Project 1',
         description: 'Description for Project 1',
         imageUrl: 'logo1.png',
-        category: 'partner',
+        category: 'research',
       },
       {
         id: 2,

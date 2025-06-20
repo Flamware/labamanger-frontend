@@ -70,8 +70,15 @@ describe('Project Component', () => {
     expect(screen.getByText('Test Project')).toBeInTheDocument();
     expect(screen.getByText('TP')).toBeInTheDocument();
     expect(screen.getByText('This is a test project')).toBeInTheDocument();
-    expect(screen.getByText('Début : 2023-01-01')).toBeInTheDocument();
-    expect(screen.getByText('Fin : 2023-12-31')).toBeInTheDocument();
+    // Use a custom matcher for the start date due to <strong> tag
+    expect(screen.getByText((content, element) =>
+      element?.tagName.toLowerCase() === 'p' &&
+      content.includes('2023-01-01')
+    )).toBeInTheDocument();
+    expect(screen.getByText((content, element) =>
+      element?.tagName.toLowerCase() === 'p' &&
+      content.includes('2023-12-31')
+    )).toBeInTheDocument();
     expect(screen.getByText('En cours')).toBeInTheDocument();
     expect(screen.getByText('Test Org')).toBeInTheDocument();
     expect(screen.getByText('Partner 1, Partner 2')).toBeInTheDocument();
