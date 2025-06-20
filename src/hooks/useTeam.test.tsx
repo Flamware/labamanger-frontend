@@ -57,6 +57,7 @@ describe('useTeam Hook', () => {
       Promise.resolve({
         ok: false,
         statusText: errorMessage,
+        text: () => Promise.resolve(errorMessage), // Add this line to mock .text()
       })
     );
 

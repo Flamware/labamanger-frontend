@@ -26,7 +26,7 @@ const orcid_id = lien.split('/').pop();
   }, []);
 
   return (
-    <p>{orcidData}</p>
+    orcidData !== null ? <p>{orcidData}</p> : null
   );
 }
 

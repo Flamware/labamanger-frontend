@@ -53,7 +53,9 @@ describe('PublicationList Component', () => {
 
     expect(screen.getByText('Abstract for Publication 1')).toBeInTheDocument();
     expect(screen.getByText('Type : Article | Langue : English')).toBeInTheDocument();
-    expect(screen.getByText('Keywords : keyword1, keyword2')).toBeInTheDocument();
+    const keywordsNode = screen.getByText('keyword1, keyword2');
+    expect(keywordsNode).toBeInTheDocument();
+    expect(keywordsNode.parentElement?.textContent).toContain('Keywords :');
   });
 
   it('does not display publication details when collapsed', () => {
