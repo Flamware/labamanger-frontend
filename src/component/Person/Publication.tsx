@@ -1,5 +1,5 @@
-import { usePublicationsPerson } from '../../hooks/usePublicationsPerson.tsx';
-import PublicationPageContent from '../publications/PublicationPageContent.tsx';
+import { usePublicationsPerson } from '../../hooks/usePublicationsPerson';
+import PublicationPageContent from '../publications/PublicationPageContent';
 
 function Publication({ userId }: { userId: number }) {
     const { publications, loading, error } = usePublicationsPerson(userId);

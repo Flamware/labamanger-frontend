@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PublicationsDTO } from '../models/publications.tsx';
+import { PublicationsDTO } from '../models/publications';
 
 export const usePublications = () => {
     const [publications, setPublications] = useState<PublicationsDTO[]>([]);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {BackendProject} from "../models/projects.tsx";
+import {BackendProject} from "../models/projects";
 
 export interface Project {
     id: number; // You might need to generate this on the frontend or have it in the backend response

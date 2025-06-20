@@ -1,20 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import Footer from "../component/Footer.tsx";
-import { useProjectDetails } from "../hooks/useProject.tsx"; // Assurez-vous que le chemin est correct
+import Footer from "../component/Footer";
+import { useProjectDetails } from "../hooks/useProject"; // Assurez-vous que le chemin est correct
 
 const Project: React.FC = () => {
     // useParams retourne toujours des chaînes de caractères
     const { projectId } = useParams<{ projectId: string }>();
 
-    // Convertit l'ID du projet en nombre, en toute sécurité
-    const numericProjectId = useMemo(() => {
+    // Utilise directement l'ID du projet comme chaîne de caractères
+    const validProjectId = useMemo(() => {
         if (!projectId) return undefined;
-        const id = parseInt(projectId, 10);
-        return isNaN(id) ? undefined : id;
+        return projectId.trim() === '' ? undefined : projectId;
     }, [projectId]);
 
-    const { backendProject, loading, error } = useProjectDetails(numericProjectId);
+    const { backendProject, loading, error } = useProjectDetails(validProjectId);
     const [mainImageUrl, setMainImageUrl] = useState<string | null>(null);
 
     // Met à jour l'image principale lorsque les données du projet sont chargées
