@@ -1,0 +1,94 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Cascadia Code"
+skinparam sequenceMessageAlign center
+
+participant Browser as B
+participant "React App" as RA
+participant "Projects Page\n(Projects.tsx)" as PP
+participant "ProjectCarousel\n(ProjectCarousel.tsx)" as PC
+participant "useProjects Hook\n(useProjects.ts)" as UP
+participant "API Backend\n(LabManager)" as API
+
+activate B
+B -> RA: User navigates to /projets
+
+activate RA
+RA -> PP: Renders Projects Page component
+
+activate PP
+PP -> PC: Renders ProjectCarousel component
+
+activate PC
+PC -> UP: Calls useProjects() hook (initial render)
+
+activate UP
+UP -> UP: Initializes state (projects=[], loading=true, error=null)
+UP -> API: HTTP GET /LabManager/api/v4/projects (fetch all projects)
+deactivate UP
+
+activate API
+API -->> UP: Returns JSON data (list of projects)
+deactivate API
+
+activate UP
+UP -> UP: Updates state (projects=[...], loading=false)
+UP -->> PC: Returns { projects, loading, error }
+
+deactivate UP
+
+activate PC
+PC -> PC: useEffect: projects updated, sets displayedProjects
+PC -> PC: useEffect: displayedProjects updated, fetches image URLs for each project
+
+loop For each project in displayedProjects
+    PC -> API: HTTP GET /LabManager/api/v4/images/{imageUrl}
+    activate API
+    API -->> PC: Returns image data/URL
+    deactivate API
+    PC -> PC: Stores imageUrls in state
+end
+
+PC -> PC: Renders filter buttons and project grid
+PC -->> PP: Renders ProjectCarousel content
+deactivate PC
+
+PP -> B: Renders Projects Page UI (Hero Section, Carousel, Footer)
+deactivate PP
+
+B -> B: User views projects
+
+alt User clicks a filter button (e.g., "Projets Open Source")
+    activate B
+    B -> PC: Clicks filter button
+    activate PC
+    PC -> PC: handleFilterClick(filterType)
+    PC -> PC: Updates activeFilter state
+    PC -> PC: Filters 'projects' state to update 'displayedProjects'
+    PC -> PC: useEffect: displayedProjects updated, fetches image URLs for filtered projects (if needed)
+    PC -> PC: Re-renders project grid with filtered projects
+    deactivate PC
+end
+
+alt User clicks "En savoir plus" on a project card
+    B -> RA: Navigates to /projets/:projectId
+    deactivate B
+
+    activate RA
+    RA -> PP: Unmounts Projects Page
+    RA -> "Project Page\n(Project.tsx)": Renders Project Page component
+    activate "Project Page\n(Project.tsx)"
+    "Project Page\n(Project.tsx)" -> "useProjectDetails Hook\n(useProject.ts)": Calls useProjectDetails(projectId)
+    activate "useProjectDetails Hook\n(useProject.ts)"
+    "useProjectDetails Hook\n(useProject.ts)" -> API: HTTP GET /LabManager/api/v4/projects/{projectId}
+    activate API
+    API -->> "useProjectDetails Hook\n(useProject.ts)": Returns project details JSON
+    deactivate API
+    "useProjectDetails Hook\n(useProject.ts)" -->> "Project Page\n(Project.tsx)": Returns { backendProject, loading, error }
+    deactivate "useProjectDetails Hook\n(useProject.ts)"
+    "Project Page\n(Project.tsx)" -> B: Renders Project Details UI
+    deactivate "Project Page\n(Project.tsx)"
+    deactivate RA
+end
+
+@enduml

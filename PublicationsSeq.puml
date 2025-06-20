@@ -1,0 +1,123 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName "Cascadia Code"
+skinparam sequenceMessageAlign center
+
+participant Browser as B
+participant "React App" as RA
+participant "PublicationsPage\n(PublicationsPage.tsx)" as PP
+participant "usePublications Hook\n(usePublications.ts)" as UP
+participant "API Backend\n(LabManager)" as API
+participant "PublicationPageContent\n(PublicationPageContent.tsx)" as PPC
+participant "PublicationFilters\n(PublicationFilters.tsx)" as PF
+participant "PublicationList\n(PublicationList.tsx)" as PL
+
+activate B
+B -> RA: User navigates to /publications
+
+activate RA
+RA -> PP: Renders PublicationsPage component
+
+activate PP
+PP -> UP: Calls usePublications() hook (initial render)
+
+activate UP
+UP -> UP: Initializes state (publications=[], loading=true, error=null)
+UP -> API: HTTP GET /LabManager/api/v4/publications (fetch all publications)
+deactivate UP
+
+activate API
+API -->> UP: Returns JSON data (list of publications)
+deactivate API
+
+activate UP
+UP -> UP: Updates state (publications=[...], loading=false)
+UP -->> PP: Returns { publications, loading, error }
+deactivate UP
+
+activate PP
+PP -> PPC: Renders PublicationPageContent component, passing publications, loading, error as props
+
+activate PPC
+PPC -> PPC: Initializes filter states (yearFilter, typeFilter, etc.)
+PPC -> PPC: useMemo: Calculates initial filterOptions (years, types, authors) from all publications
+PPC -> PF: Renders PublicationFilters component, passing filter states and callbacks
+PPC -> PL: Renders PublicationList component, passing initial filteredPublications and toggleExpand
+
+activate PF
+PF -->> PPC: Renders filter UI (input, selects, button)
+deactivate PF
+
+activate PL
+PL -->> PPC: Renders initial list of publications
+deactivate PL
+
+PPC -->> PP: Renders content (filters + list)
+deactivate PPC
+
+PP -> B: Renders Publications Page UI (main content + Footer)
+deactivate PP
+deactivate RA
+
+B -> B: User views publications
+
+alt User interacts with filters (e.g., selects a year)
+    activate B
+    B -> PF: User selects a filter option (e.g., year)
+    activate PF
+    PF -> PPC: Calls onYearChange(newValue) callback
+    deactivate PF
+
+    activate PPC
+    PPC -> PPC: Updates yearFilter state
+    PPC -> PPC: useMemo: Recalculates filteredPublications based on new filter
+    PPC -> PPC: useMemo: Recalculates filterOptions (counts for other filters) based on current search and other filters
+    PPC -> PF: Re-renders PublicationFilters (updated counts for options)
+    PPC -> PL: Re-renders PublicationList (new filteredPublications)
+
+    activate PF
+    PF -->> PPC: Renders updated filter UI
+    deactivate PF
+
+    activate PL
+    PL -->> PPC: Renders updated list of publications
+    deactivate PL
+    deactivate PPC
+end
+
+alt User clicks on a publication card to expand/collapse
+    activate B
+    B -> PL: User clicks a publication card
+    activate PL
+    PL -> PPC: Calls toggleExpand(index) callback
+    deactivate PL
+
+    activate PPC
+    PPC -> PPC: Updates expandedIndex state
+    PPC -> PL: Re-renders PublicationList (to apply expansion/collapse)
+    activate PL
+    PL -->> PPC: Renders updated list with expanded/collapsed publication
+    deactivate PL
+    deactivate PPC
+end
+
+alt User clicks on an author link within a publication card
+    activate B
+    B -> PL: User clicks author link
+    activate PL
+    PL -> RA: Navigates to /person/:personId (router handles navigation)
+    deactivate PL
+    deactivate B
+    RA -> "Person Page": Renders Person Page component (as per previous diagram)
+end
+
+alt User clicks PDF or DBLP link
+    activate B
+    B -> PL: User clicks a PDF or DBLP link
+    activate PL
+    PL -> B: Opens new tab for PDF/DBLP URL (direct link)
+    deactivate PL
+    deactivate B
+end
+
+@enduml
